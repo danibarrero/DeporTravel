@@ -60,6 +60,7 @@ public class WebSecurityConfig {
                     authorizationManagerRequestMatcherRegistry.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                             .requestMatchers("/v1/api/auth/**").permitAll()
                             .requestMatchers(HttpMethod.GET,"/v1/api/actividades/**").permitAll()
+                            .requestMatchers(HttpMethod.GET,"/v1/api/comentarios/**").permitAll()
                             .anyRequest().authenticated();
                 })
                 .addFilterBefore(authenticationTokenFilter(), UsernamePasswordAuthenticationFilter.class)

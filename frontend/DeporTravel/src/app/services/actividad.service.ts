@@ -14,3 +14,4 @@ export class ActividadService {
     return this.httpClient.get<any>(`${this.url}/actividadesAll`);
   }
 }
+

@@ -18,7 +18,7 @@
         <i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}
       </p>
       <p class="actividad-date">
-        <i class="fas fa-calendar"></i> {{ actividad.fecha }}
+        <i class="fas fa-calendar"></i> {{ actividad.fecha | date: 'mediumDate' }}
       </p>
 
       <!-- Descripción de la actividad -->
@@ -39,12 +39,25 @@
       <!-- Apartado de comentarios -->
       <div class="actividad-comments">
         <h4>Comentarios</h4>
+
+        <!-- Lista de comentarios -->
+        <div *ngFor="let comentario of comentarios" class="comentario-item mb-3">
+          <strong>{{ comentario.usuario?.nombre || 'Anónimo' }}</strong>
+          <small class="text-muted"> - {{ comentario.fechaComentario | date: 'shortDate' }}</small>
+          <p>{{ comentario.comentario }}</p>
+          <hr />
+        </div>
+
+        <!-- Añadir nuevo comentario -->
         <textarea
+          [(ngModel)]="nuevoComentario"
           rows="4"
           placeholder="Escribe tu comentario aquí..."
-          class="comentario-textarea"
+          class="comentario-textarea form-control mb-2"
         ></textarea>
-        <button class="btn-comentar">Enviar comentario</button>
+        <button (click)="enviarComentario()" class="btn btn-primary btn-comentar">
+          Enviar comentario
+        </button>
       </div>
     </div>
   </div>

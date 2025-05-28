@@ -1,0 +1,54 @@
+<div class="row g-0">
+  <div
+    class="col-12 col-md-8 offset-md-2 actividad-container"
+    style="margin-top: 1rem"
+  >
+    <div *ngIf="actividadesFiltradas as actividad">
+      <!-- Imagen de la actividad -->
+      <img
+        [src]="actividad.imagen"
+        class="actividad-image mb-3"
+      />
+
+      <!-- Título y Precio -->
+      <div class="actividad-title-price d-flex justify-content-between">
+        <h3 class="actividad-title">{{ actividad.nombre }}</h3>
+        <h3 class="actividad-price">{{ actividad.precio }}€</h3>
+      </div>
+
+      <!-- Ubicación y Fecha -->
+      <p class="actividad-location">
+        <i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}
+      </p>
+      <p class="actividad-date">
+        <i class="fas fa-calendar"></i> {{ actividad.fecha }}
+      </p>
+
+      <!-- Descripción de la actividad -->
+      <p class="actividad-description">{{ actividad.descripcion }}</p>
+
+      <!-- Botones de acción -->
+      <div
+        class="actividad-button-container d-flex justify-content-between align-items-center"
+      >
+        <a routerLink="/inicio/actividades">
+          <button class="btn-atras">Atrás</button>
+        </a>
+        <button class="btn-add-to-cart">Añadir al Carrito</button>
+      </div>
+
+      <hr class="comentarios-separador" />
+
+      <!-- Apartado de comentarios -->
+      <div class="actividad-comments">
+        <h4>Comentarios</h4>
+        <textarea
+          rows="4"
+          placeholder="Escribe tu comentario aquí..."
+          class="comentario-textarea"
+        ></textarea>
+        <button class="btn-comentar">Enviar comentario</button>
+      </div>
+    </div>
+  </div>
+</div>

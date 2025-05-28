@@ -1,0 +1,106 @@
+/* Estructura base del navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Permite que los elementos bajen de línea si no caben */
+  padding-top: 2rem;
+}
+
+/* Parte derecha del navbar */
+#navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Logo */
+#logo {
+  max-height: 70px;
+}
+
+/* Enlaces */
+.navbar-link {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: #edc981;
+}
+
+/* Botón de login */
+.login-button {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-block;
+}
+
+.login-button:hover {
+  background-color: #edc981;
+  color: #fff;
+}
+
+/* Icono carrito */
+#cart-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#cart-icon:hover {
+  color: #edc981;
+}
+
+.active-link {
+  color: #edc981;
+  font-weight: bold;
+}
+
+/* ----------------------------- */
+/* RESPONSIVE: móviles y tablets */
+/* ----------------------------- */
+@media (max-width: 768px) {
+  /* Asegura que el contenedor padre no intente alinear horizontalmente */
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+  }
+
+  .navbar .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Logo centrado y adaptado */
+  #logo {
+    max-width: 70%;
+    height: auto;
+  }
+
+  /* Parte derecha abajo del logo */
+  #navbar-right {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1rem;
+  }
+
+  /* Enlaces y botones ocupan ancho completo */
+  .navbar-link,
+  .login-button {
+    width: 100%;
+    text-align: center;
+  }
+
+  #cart-icon {
+    margin-top: 10px;
+  }
+}

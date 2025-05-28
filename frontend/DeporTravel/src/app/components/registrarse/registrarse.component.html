@@ -1,0 +1,59 @@
+<div class="auth-container">
+  <div class="background"></div>
+
+  <div class="auth-box">
+    <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
+    <h2>Crear Cuenta</h2>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="nombre"
+          name="nombre"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-user"></i>
+        <input
+          type="text"
+          placeholder="Apellido"
+          [(ngModel)]="apellido"
+          name="apellido"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input
+          type="email"
+          placeholder="Correo electrónico"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input
+          type="password"
+          placeholder="Contraseña"
+          [(ngModel)]="contrasena"
+          name="contrasena"
+          required
+        />
+      </div>
+
+      <button [routerLink]="['/inicio']" type="button">Registrarse</button>
+      <button [routerLink]="['/login']" type="button">
+        Ya tengo cuenta
+      </button>
+    </form>
+  </div>
+</div>

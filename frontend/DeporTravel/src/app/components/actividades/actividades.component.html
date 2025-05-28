@@ -1,0 +1,60 @@
+<main class="container-xl actividades-section">
+  <!-- Separador del header -->
+  <div class="separador-header"></div>
+
+  <!-- Buscador -->
+  <div class="buscador mb-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Buscar actividad..."
+      [(ngModel)]="busqueda"
+    />
+  </div>
+  <!-- Fin buscador -->
+
+  <!-- Actividades -->
+  <div class="row justify-content-center align-items-stretch">
+    <div
+      class="col-md-4 d-flex mb-4"
+      *ngFor="let actividad of actividadesFiltradas"
+    >
+      <!-- Tarjeta -->
+      <div
+        class="card shadow d-flex flex-column h-100"
+        style="cursor: pointer"
+        (click)="goToActividad(actividad.id)"
+      >
+        <!-- Imagen -->
+        <img
+          [src]="actividad.imagen"
+          class="card-img-top custom-card-img"
+        />
+
+        <!-- Contenido -->
+        <div class="card-body">
+          <h5 class="card-title">{{ actividad.nombre }}</h5>
+          <ul class="list-unstyled">
+            <li><i class="fas fa-dumbbell"></i> {{ actividad.categoria }}</li>
+            <li><i class="fas fa-calendar-alt"></i> {{ actividad.fecha }}</li>
+            <li><i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}</li>
+            <li><i class="fas fa-euro-sign"></i> {{ actividad.precio }}€</li>
+          </ul>
+        </div>
+
+        <!-- Botón de Añadir -->
+        <div class="card-footer">
+          <button
+            class="btn btn-outline-primary add-to-cart"
+            (click)="$event.stopPropagation()"
+          >
+            <i class="fas fa-shopping-cart"></i> Añadir
+          </button>
+        </div>
+        <!-- Fin Botón de Añadir -->
+      </div>
+    </div>
+    <!-- Fin Tarjeta -->
+  </div>
+  <!-- Fin Actividades -->
+</main>

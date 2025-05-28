@@ -1,0 +1,44 @@
+<div class="auth-container">
+  <div class="background"></div>
+
+  <form class="auth-box" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+    <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
+    <h2>Iniciar Sesión</h2>
+
+    <!-- Correo -->
+    <div class="input-group">
+      <label for="correoElectronico" class="form-label"></label>
+      <i class="fas fa-envelope"></i>
+      <input
+        id="correoElectronico"
+        type="email"
+        placeholder="Correo electrónico"
+        formControlName="correoElectronico"
+        [ngClass]="{ 'is-invalid': correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty) }"
+      />
+    </div>
+    <div *ngIf="correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)" class="error">
+      <small *ngIf="correoElectronico?.errors?.['required']">El correo es obligatorio.</small>
+      <small *ngIf="correoElectronico?.errors?.['pattern']">El correo no es válido.</small>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="input-group">
+      <label for="contrasena" class="form-label"></label>
+      <i class="fas fa-lock"></i>
+      <input
+        id="contrasena"
+        type="password"
+        placeholder="Contraseña"
+        formControlName="contrasena"
+        [ngClass]="{ 'is-invalid': contrasena?.invalid && (contrasena?.touched || contrasena?.dirty) }"
+      />
+    </div>
+    <div *ngIf="contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)" class="error">
+      <small *ngIf="contrasena?.errors?.['required']">La contraseña es obligatoria.</small>
+    </div>
+
+    <button type="button" [routerLink]="['/inicio-sesion']">Iniciar sesión</button>
+    <button type="button" [routerLink]="['/registrarse']">Registrarse</button>
+  </form>
+</div>

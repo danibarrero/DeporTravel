@@ -1,0 +1,66 @@
+<!-- Foto con texto -->
+<div class="image-section" style="background-image: url('/img/Inicio.jpg')">
+  <div class="container-xl texto-image">
+    <h1 class="col-10 offset-1 text-center">
+      Vive la emoción del deporte en cada destino
+    </h1>
+    <br />
+    <p class="col-8 offset-2 text-center">
+      Descubre nuestros viajes diseñados para atletas, aventureros y amantes del
+      deporte. Corre, pedalea, escala y vive experiencias únicas alrededor del
+      mundo.
+    </p>
+  </div>
+</div>
+<!-- Fin foto con texto -->
+
+<!-- Actividades -->
+<div class="container-xl viajes-section">
+  <!-- Fila de Actividades -->
+  <div class="row justify-content-center align-items-stretch">
+    <div class="col-md-4 mb-4 d-flex" *ngFor="let actividad of actividadesFiltradas">
+      <!-- Tarjeta clicable -->
+      <div
+        class="card shadow d-flex flex-column h-100"
+        style="cursor: pointer"
+        (click)="goToActividad(actividad.id)"
+      >
+        <!-- Imagen -->
+        <img
+          [src]="actividad.imagen"
+          class="card-img-top custom-card-img"
+        />
+        <div class="card-body">
+          <!-- Título -->
+          <h5 class="card-title">{{ actividad.nombre }}</h5>
+
+          <!-- Detalles -->
+          <ul class="list-unstyled">
+            <li><i class="fas fa-dumbbell"></i> {{ actividad.categoria }}</li>
+            <li><i class="fas fa-calendar-alt"></i> {{ actividad.fecha }}</li>
+            <li><i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}</li>
+            <li><i class="fas fa-euro-sign"></i> {{ actividad.precio }}€</li>
+          </ul>
+        </div>
+
+        <!-- Botón Añadir con ícono de carrito -->
+        <div class="card-footer d-flex justify-content-end">
+          <button
+            class="btn btn-outline-primary add-to-cart"
+            (click)="$event.stopPropagation()"
+          >
+            <i class="fas fa-shopping-cart"></i> Añadir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón Ver más -->
+  <div class="col-md-12 text-center ver-mas">
+    <a routerLink="/inicio/actividades" class="btn btn-lg bg-white ver-mas-btn">
+      Ver más
+    </a>
+  </div>
+</div>
+<!-- Fin Actividades -->

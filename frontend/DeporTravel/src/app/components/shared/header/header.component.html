@@ -1,0 +1,85 @@
+<div class="container-xl" id="header-container">
+  <!-- Inicio Navbar -->
+  <nav class="navbar row">
+    <div class="row justify-content-between">
+      <!-- Logo a la izquierda -->
+      <div class="col-12 col-md-4 text-center mb-3 mb-md-0">
+        <a routerLink="/inicio" class="d-flex justify-content-center">
+          <img
+            src="img/Logo sin fondo.png"
+            alt="Logo"
+            class="d-inline-block align-text-top img-fluid"
+            id="logo"
+          />
+        </a>
+      </div>
+
+      <!-- Enlaces y botones a la derecha -->
+      <div class="col-12 col-md-5 d-flex align-items-center ms-auto" id="navbar-right">
+
+        <a
+          routerLink="/inicio"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-link"
+        >
+          Inicio
+        </a>
+
+        <a
+          routerLink="/inicio/actividades"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-link"
+        >
+          Actividades
+        </a>
+
+        <a
+          routerLink="/sobre-nosotros"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-link"
+        >
+          Sobre nosotros
+        </a>
+
+        <!-- Si está logueado muestra dropdown usuario -->
+        <ng-container *ngIf="isLoggedIn; else noLogin">
+          <div class="dropdown ms-3">
+            <a
+              class="navbar-link dropdown-toggle"
+              href="#"
+              role="button"
+              id="userDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-user-circle"></i> {{ username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" routerLink="/perfil">Perfil</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#" (click)="cerrarSesion()">Cerrar sesión</a></li>
+            </ul>
+          </div>
+        </ng-container>
+
+        <!-- Si NO está logueado muestra botón login -->
+        <ng-template #noLogin>
+          <a
+            routerLink="/login"
+            routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }"
+            class="login-button"
+          >
+            Iniciar Sesión
+          </a>
+        </ng-template>
+
+        <i class="fas fa-cart-shopping" id="cart-icon"></i>
+      </div>
+    </div>
+  </nav>
+  <!-- Fin Navbar -->
+</div>

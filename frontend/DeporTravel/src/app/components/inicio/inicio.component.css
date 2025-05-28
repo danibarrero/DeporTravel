@@ -1,0 +1,263 @@
+/* ---------- NAVBAR ---------- */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 2rem;
+}
+
+/* Parte izquierda del navbar */
+#logo {
+  max-height: 70px;
+}
+
+/* Parte derecha del navbar */
+#navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.navbar-link {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+  color: #edc981;
+}
+
+/* Estilos del login-button */
+.login-button {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
+  display: inline-block;
+}
+
+.login-button:hover {
+  background-color: #edc981;
+  color: #fff;
+}
+
+/* Icono carrito */
+#cart-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#cart-icon:hover {
+  color: #edc981;
+}
+
+.active-link {
+  color: #edc981;
+  font-weight: bold;
+}
+
+/* ---------- SECCIÓN IMAGEN CON TEXTO ---------- */
+
+.image-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 70vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.texto-image {
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.texto-image h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.texto-image p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ---------- TARJETAS ACTIVIDADES ---------- */
+
+.viajes-section {
+  margin-top: 30px;
+}
+
+.custom-card-img {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 0.375rem;
+  border-top-right-radius: 0.375rem;
+}
+
+.list-unstyled li {
+  margin-bottom: 4px;
+}
+
+.card-body ul {
+  margin-bottom: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Por defecto: 3 columnas (PC) */
+.col-md-4 {
+  padding: 0 15px;
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%;
+}
+
+.card {
+  width: 100%;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.card-body {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.card-body li {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.card-body ul li i {
+  margin-right: 8px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.card-footer {
+  padding: 10px;
+  background-color: white;
+  text-align: right;
+  position: relative;
+}
+
+.add-to-cart {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.add-to-cart:hover {
+  background-color: #edc981;
+  color: white;
+}
+
+.add-to-cart i {
+  margin-right: 5px;
+}
+
+/* Botón Ver más */
+.ver-mas {
+  margin-top: 25px;
+}
+
+.ver-mas-btn {
+  text-decoration: none;
+  color: black;
+  padding: 7px 17px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background-color: white;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.ver-mas-btn:hover {
+  color: #edc981;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablet: 2 tarjetas por fila */
+@media (max-width: 992px) {
+  .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .texto-image h1 {
+    font-size: 2rem;
+  }
+
+  .texto-image p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Móvil: 1 tarjeta por fila + imagen adaptada */
+@media (max-width: 576px) {
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .image-section {
+    height: auto;
+    padding: 3rem 1rem;
+  }
+
+  .texto-image h1 {
+    font-size: 1.6rem;
+  }
+
+  .texto-image p {
+    font-size: 1rem;
+  }
+
+  .add-to-cart {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ver-mas-btn {
+    width: 100%;
+    max-width: 250px;
+    margin-top: 15px;
+  }
+}

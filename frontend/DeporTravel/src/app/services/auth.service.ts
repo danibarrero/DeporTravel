@@ -8,7 +8,7 @@ import { StorageService } from './storge.service';
 })
 export class AuthService {
 
-  private apiAuthURL =  'http://localhost:8080/v1/api/auth';
+  private apiAuthURL =  'http://localhost:8080/v1/api/auth/';
 
 
   httpOptions = {
@@ -60,7 +60,7 @@ export class AuthService {
   }
 
   logout() {
-    this.storageService.clean();
+    this.storageService.logout();
   }
 
   errorHandler(error: any) {

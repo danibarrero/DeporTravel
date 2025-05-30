@@ -43,7 +43,7 @@ public class Usuario {
             message = "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números")
     private String contrasena;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(	name = "user_roles",
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

@@ -25,10 +25,9 @@ export class InicioComponent {
     this.actividadservice.getAll().subscribe({
       next: (response: any) => {
         this.data = response;
-        console.log(this.data);
       },
       error: (err) => {
-        console.error('Error al obtener las colecciones:', err);
+        console.error('Error al obtener las actividades:', err);
       },
     });
   }

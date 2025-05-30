@@ -1,9 +1,16 @@
+/* Contenedor principal del header */
+#header-container {
+  width: 100%;
+  padding: 0 1rem;
+}
+
 /* Estructura base del navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap; /* Permite que los elementos bajen de línea si no caben */
+  flex-wrap: wrap;
   padding-top: 2rem;
+  width: 100%;
 }
 
 /* Parte derecha del navbar */
@@ -30,12 +37,17 @@
   color: #edc981;
 }
 
+.active-link {
+  color: #edc981;
+  font-weight: bold;
+}
+
 /* Botón de login */
 .login-button {
   text-decoration: none;
   color: #000;
   font-weight: 500;
-  border: 2px solid black;
+  border: 1.5px solid black;
   border-radius: 5px;
   padding: 5px 10px;
   transition: background-color 0.3s, color 0.3s;
@@ -47,57 +59,111 @@
   color: #fff;
 }
 
+/* Usuario logueado */
+.user-button {
+  background-color: transparent;
+  color: #000;
+  font-weight: 500;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.user-button:hover {
+  background-color: #edc981;
+  color: #fff;
+}
+
+.user-dropdown .dropdown-menu {
+  text-align: center;
+  border-radius: 8px;
+  padding: 10px 0;
+}
+
+.user-dropdown .dropdown-item {
+  color: #000;
+  padding: 10px;
+  transition: all 0.3s;
+}
+
+.user-dropdown .dropdown-item:hover {
+  background-color: #edc981;
+  color: white;
+}
+
 /* Icono carrito */
 #cart-icon {
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
+  transition: color 0.3s;
 }
 
 #cart-icon:hover {
   color: #edc981;
 }
 
-.active-link {
-  color: #edc981;
-  font-weight: bold;
-}
-
 /* ----------------------------- */
 /* RESPONSIVE: móviles y tablets */
 /* ----------------------------- */
 @media (max-width: 768px) {
-  /* Asegura que el contenedor padre no intente alinear horizontalmente */
+  #header-container {
+    padding: 0;
+  }
+
   .navbar {
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
+    width: 100%;
   }
 
   .navbar .row {
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    margin: 0;
   }
 
-  /* Logo centrado y adaptado */
   #logo {
-    max-width: 70%;
+    max-width: 80%;
     height: auto;
+    margin-bottom: 1rem;
   }
 
-  /* Parte derecha abajo del logo */
   #navbar-right {
     flex-direction: column;
     align-items: center;
     gap: 10px;
     margin-top: 1rem;
+    width: 100%;
   }
 
-  /* Enlaces y botones ocupan ancho completo */
   .navbar-link,
-  .login-button {
+  .login-button,
+  .user-button {
     width: 100%;
     text-align: center;
+  }
+
+  .user-dropdown {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .user-dropdown .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .user-dropdown .dropdown-item {
+    width: 100%;
   }
 
   #cart-icon {

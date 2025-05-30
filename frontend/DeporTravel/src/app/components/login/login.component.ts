@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { StorageService } from '../../services/storge.service';
@@ -29,7 +34,13 @@ export class IniciarSesionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      correoElectronico: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@test\.com$')]],
+      correoElectronico: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@test.com$'),
+        ],
+      ],
       contrasena: ['', [Validators.required]],
     });
 
@@ -52,24 +63,21 @@ export class IniciarSesionComponent implements OnInit {
 
     this.authService.login(correoElectronico, contrasena).subscribe({
       next: (data) => {
-        this.storageService.clean();
+        this.storageService.logout();
         this.storageService.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         console.log('isLoggedIn = ' + this.isLoggedIn);
         this.roles = this.storageService.getUser().roles;
-        this.reloadPage();
+        console.log(this.storageService.getUser());
+        this.router.navigateByUrl('/inicio');
       },
       error: (err) => {
         this.errorMessage = err.error.message;
         this.isLoginFailed = true;
       },
     });
-  }
-
-  reloadPage(): void {
-    window.location.reload();
   }
 
   get contrasena() {

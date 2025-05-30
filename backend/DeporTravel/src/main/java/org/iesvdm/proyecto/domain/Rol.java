@@ -2,6 +2,7 @@ package org.iesvdm.proyecto.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "roles")
 public class Rol {
     @Id
@@ -18,5 +20,4 @@ public class Rol {
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERol rol;
-
 }

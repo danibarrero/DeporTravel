@@ -36,25 +36,24 @@ export class AuthService {
       return this.httpClient.post(this.apiURL + 'logout', { }, this.httpOptions);
     }
   */
-
   register(
     nombre: string,
-    apellidos: string,
+    apellido: string,
     contrasena: string,
     correoElectronico: string,
     rol: string
   ): Observable<any> {
-    let registerRequest = {
-      nombre: nombre,
-      apellidos: apellidos,
-      contrasena: contrasena,
-      correoElectronico: correoElectronico,
-      roles: [rol],
+    const registerRequest = {
+      nombre,
+      apellido,
+      contrasena,
+      correoElectronico,
+      roles: [rol]
     };
 
     return this.httpClient.post(
-      this.apiAuthURL + 'register',
-      JSON.stringify(registerRequest),
+      `${this.apiAuthURL}register`,
+      registerRequest,
       this.httpOptions
     );
   }

@@ -1,11 +1,9 @@
 package org.iesvdm.proyecto.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -39,8 +37,8 @@ public class Usuario {
     private String correoElectronico;
 
     @NotBlank(message = "La contraseña no puede estar vacía")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",
-            message = "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números")
+//    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",
+//            message = "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números")
     private String contrasena;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -38,24 +38,26 @@ export class RegistrarseComponent implements OnInit {
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
-      this.registerForm.markAllAsTouched();
       return;
     }
 
-    const { nombre, apellido, correoElectronico, contrasena } =
-      this.registerForm.value;
-    const rol = 'usuario';
+    const formData = this.registerForm.value;
 
     this.authService
-      .register(nombre, apellido, contrasena, correoElectronico, rol)
+      .register(
+        formData.nombre,
+        formData.apellido,
+        formData.contrasena,
+        formData.correoElectronico,
+        'USER'
+      )
       .subscribe({
         next: () => {
           this.router.navigate(['/login']);
         },
         error: (err) => {
-          this.errorMessage =
-            err.error?.message || 'Error al registrar. Intenta de nuevo.';
-        },
+          this.errorMessage = err.error?.message || 'Error en el registro';
+        }
       });
   }
 

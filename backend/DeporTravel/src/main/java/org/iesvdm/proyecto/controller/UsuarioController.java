@@ -41,7 +41,7 @@ public class UsuarioController {
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
 
         usuario.setNombre(usuarioDetails.getNombre());
-        usuario.setApellidos(usuarioDetails.getApellidos());
+        usuario.setApellido(usuarioDetails.getApellido());
         usuario.setCorreoElectronico(usuarioDetails.getCorreoElectronico());
         usuario.setContrasena(usuarioDetails.getContrasena());
 

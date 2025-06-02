@@ -1,27 +1,78 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-registrarse',
-  imports: [CommonModule, FormsModule, RouterLink],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './registrarse.component.html',
-  styleUrl: './registrarse.component.css',
+  styleUrls: ['./registrarse.component.css'],
 })
-export class RegistrarseComponent {
-  nombre: string = '';
-  apellido: string = '';
-  email: string = '';
-  contrasena: string = '';
+export class RegistrarseComponent implements OnInit {
+  registerForm!: FormGroup;
+  errorMessage = '';
+  mostrarContrasena = false;
 
-  onSubmit() {
-    console.log('Datos enviados:', {
-      nombre: this.nombre,
-      apellido: this.apellido,
-      email: this.email,
-      contrasena: this.contrasena
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
+      correoElectronico: ['', [Validators.required, Validators.email]],
+      contrasena: ['', [Validators.required, Validators.minLength(6)]],
     });
-    // Aquí puedes agregar lógica para enviar los datos al backend
+  }
+
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    const { nombre, apellido, correoElectronico, contrasena } =
+      this.registerForm.value;
+    const rol = 'usuario';
+
+    this.authService
+      .register(nombre, apellido, contrasena, correoElectronico, rol)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/login']);
+        },
+        error: (err) => {
+          this.errorMessage =
+            err.error?.message || 'Error al registrar. Intenta de nuevo.';
+        },
+      });
+  }
+
+  VerOcultarContrasena(): void {
+    this.mostrarContrasena = !this.mostrarContrasena;
+  }
+
+  get nombre() {
+    return this.registerForm.get('nombre');
+  }
+  get apellido() {
+    return this.registerForm.get('apellido');
+  }
+  get correoElectronico() {
+    return this.registerForm.get('correoElectronico');
+  }
+  get contrasena() {
+    return this.registerForm.get('contrasena');
   }
 }

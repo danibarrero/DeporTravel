@@ -17,7 +17,7 @@ export class AppComponent {
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
-      const hiddenRoutes = ['/login', '/registrarse'];
+      const hiddenRoutes = ['/login', '/register'];
       this.showHeaderAndFooter = !hiddenRoutes.includes(this.router.url);
     });
   }

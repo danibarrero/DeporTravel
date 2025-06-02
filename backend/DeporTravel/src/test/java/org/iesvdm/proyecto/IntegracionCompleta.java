@@ -9,7 +9,9 @@ import org.iesvdm.proyecto.service.InscripcionService;
 import org.iesvdm.proyecto.service.UsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.cassandra.CassandraProperties;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 
 @SpringBootTest
 public class IntegracionCompleta {
@@ -31,6 +34,8 @@ public class IntegracionCompleta {
     private InscripcionService inscripcionService;
     @Autowired
     private RolRepository rolRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Test
     public void testIntegracionCompleta() {
@@ -44,8 +49,8 @@ public class IntegracionCompleta {
                 Usuario.builder()
                         .nombre("Juan")
                         .apellidos("Pérez")
-                        .correoElectronico("juan@test.com")
-                        .contrasena("123abc")
+                        .correoElectronico("juan@gmail.com")
+                        .contrasena(passwordEncoder.encode("123abc"))
                         .roles(Set.of(rolAdmin))
                         .build());
 
@@ -53,8 +58,8 @@ public class IntegracionCompleta {
                 Usuario.builder()
                         .nombre("Ana")
                         .apellidos("García")
-                        .correoElectronico("ana@test.com")
-                        .contrasena("123abc")
+                        .correoElectronico("ana@gmail.com")
+                        .contrasena(passwordEncoder.encode("123abc"))
                         .roles(Set.of(rolUser))
                         .build());
 

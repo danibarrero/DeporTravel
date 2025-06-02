@@ -1,11 +1,16 @@
 <div class="auth-container">
   <div class="background"></div>
 
-  <form class="auth-box" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+  <form
+    class="auth-box"
+    [formGroup]="loginForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
     <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
     <h2>Iniciar Sesión</h2>
 
-    <!-- Correo -->
+    <!-- Correo electrónico -->
     <div class="input-group">
       <label for="correoElectronico" class="form-label"></label>
       <i class="fas fa-envelope"></i>
@@ -14,12 +19,23 @@
         type="email"
         placeholder="Correo electrónico"
         formControlName="correoElectronico"
-        [ngClass]="{ 'is-invalid': correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty) }"
+        [ngClass]="{
+          'is-invalid':
+            correoElectronico?.invalid &&
+            (correoElectronico?.touched || correoElectronico?.dirty)
+        }"
       />
     </div>
-    <div *ngIf="correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)" class="error">
-      <small *ngIf="correoElectronico?.errors?.['required']">El correo es obligatorio.</small>
-      <small *ngIf="correoElectronico?.errors?.['pattern']">El correo no es válido.</small>
+    <div
+      *ngIf="correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)"
+      class="error"
+    >
+      <small *ngIf="correoElectronico?.errors?.['required']">
+        El correo es obligatorio.
+      </small>
+      <small *ngIf="correoElectronico?.errors?.['pattern']">
+        Solo se permiten correos de Gmail.
+      </small>
     </div>
 
     <!-- Contraseña -->
@@ -27,18 +43,37 @@
       <label for="contrasena" class="form-label"></label>
       <i class="fas fa-lock"></i>
       <input
+        [type]="mostrarContrasena ? 'text' : 'password'"
         id="contrasena"
-        type="password"
         placeholder="Contraseña"
         formControlName="contrasena"
-        [ngClass]="{ 'is-invalid': contrasena?.invalid && (contrasena?.touched || contrasena?.dirty) }"
+        [ngClass]="{
+          'is-invalid':
+            contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)
+        }"
       />
+      <i
+        class="fa-solid"
+        [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
+        (click)="VerOcultarContrasena()"
+        title="Mostrar/Ocultar contraseña"
+      ></i>
     </div>
-    <div *ngIf="contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)" class="error">
-      <small *ngIf="contrasena?.errors?.['required']">La contraseña es obligatoria.</small>
+    <div
+      *ngIf="contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)"
+      class="error"
+    >
+      <small *ngIf="contrasena?.errors?.['required']">
+        La contraseña es obligatoria.
+      </small>
     </div>
 
-    <button type="submit" [routerLink]="['/login']">Iniciar sesión</button>
-    <button type="button" [routerLink]="['/registrarse']">Registrarse</button>
+    <!-- Error general -->
+    <div *ngIf="isLoginFailed" class="error">
+      <small>{{ errorMessage }}</small>
+    </div>
+
+    <button type="submit">Iniciar sesión</button>
+    <button type="button" [routerLink]="['/register']">Registrarse</button>
   </form>
 </div>

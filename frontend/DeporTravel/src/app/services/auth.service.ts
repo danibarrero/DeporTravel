@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { StorageService } from './storge.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  private apiAuthURL =  'http://localhost:8080/v1/api/auth/';
-
+  private apiAuthURL = 'http://localhost:8080/v1/api/auth/';
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
+      'Content-Type': 'application/json',
+    }),
   };
 
-  constructor(private httpClient: HttpClient, private storageService: StorageService) { }
-
+  constructor(
+    private httpClient: HttpClient,
+    private storageService: StorageService
+  ) {}
 
   login(correoElectronico: string, contrasena: string): Observable<any> {
     return this.httpClient.post(
@@ -45,10 +45,10 @@ export class AuthService {
     rol: string
   ): Observable<any> {
     let registerRequest = {
-    nombre: nombre,
-    apellidos: apellidos,
-    contrasena: contrasena,
-    correoElectronico: correoElectronico,
+      nombre: nombre,
+      apellidos: apellidos,
+      contrasena: contrasena,
+      correoElectronico: correoElectronico,
       roles: [rol],
     };
 
@@ -64,8 +64,6 @@ export class AuthService {
   }
 
   errorHandler(error: any) {
-    //this.storageService.clean();
-
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;
@@ -75,4 +73,3 @@ export class AuthService {
     return throwError(() => errorMessage);
   }
 }
-

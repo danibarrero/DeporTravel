@@ -1,59 +1,80 @@
 <div class="auth-container">
   <div class="background"></div>
 
-  <div class="auth-box">
+  <form class="auth-box" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
     <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
-    <h2>Crear Cuenta</h2>
+    <h2>Registrarse</h2>
 
-    <form (ngSubmit)="onSubmit()">
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input
-          type="text"
-          placeholder="Nombre"
-          [(ngModel)]="nombre"
-          name="nombre"
-          required
-        />
-      </div>
+    <!-- Nombre -->
+    <div class="input-group">
+      <i class="fas fa-user"></i>
+      <input
+        type="text"
+        placeholder="Nombre"
+        formControlName="nombre"
+        [ngClass]="{'is-invalid': nombre?.invalid && (nombre?.touched || nombre?.dirty)}"
+      />
+    </div>
+    <div *ngIf="nombre?.invalid && (nombre?.touched || nombre?.dirty)" class="error">
+      <small>El nombre es obligatorio.</small>
+    </div>
 
-      <div class="input-group">
-        <i class="fas fa-user"></i>
-        <input
-          type="text"
-          placeholder="Apellido"
-          [(ngModel)]="apellido"
-          name="apellido"
-          required
-        />
-      </div>
+    <!-- Apellido -->
+    <div class="input-group">
+      <i class="fas fa-user"></i>
+      <input
+        type="text"
+        placeholder="Apellido"
+        formControlName="apellido"
+        [ngClass]="{'is-invalid': apellido?.invalid && (apellido?.touched || apellido?.dirty)}"
+      />
+    </div>
+    <div *ngIf="apellido?.invalid && (apellido?.touched || apellido?.dirty)" class="error">
+      <small>El apellido es obligatorio.</small>
+    </div>
 
-      <div class="input-group">
-        <i class="fas fa-envelope"></i>
-        <input
-          type="email"
-          placeholder="Correo electrónico"
-          [(ngModel)]="email"
-          name="email"
-          required
-        />
-      </div>
+    <!-- Correo electrónico -->
+    <div class="input-group">
+      <i class="fas fa-envelope"></i>
+      <input
+        type="email"
+        placeholder="Correo electrónico"
+        formControlName="correoElectronico"
+        [ngClass]="{'is-invalid': correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)}"
+      />
+    </div>
+    <div *ngIf="correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)" class="error">
+      <small *ngIf="correoElectronico?.errors?.['required']">El correo es obligatorio.</small>
+      <small *ngIf="correoElectronico?.errors?.['email']">Formato de correo inválido.</small>
+    </div>
 
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input
-          type="password"
-          placeholder="Contraseña"
-          [(ngModel)]="contrasena"
-          name="contrasena"
-          required
-        />
-      </div>
+    <!-- Contraseña -->
+    <div class="input-group">
+      <i class="fas fa-lock"></i>
+      <input
+        [type]="mostrarContrasena ? 'text' : 'password'"
+        placeholder="Contraseña"
+        formControlName="contrasena"
+        [ngClass]="{'is-invalid': contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)}"
+      />
+      <i
+        class="fa-solid"
+        [ngClass]="mostrarContrasena ? 'fa-eye' : 'fa-eye-slash'"
+        (click)="VerOcultarContrasena()"
+        title="Mostrar/Ocultar contraseña"
+      ></i>
+    </div>
+    <div *ngIf="contrasena?.invalid && (contrasena?.touched || contrasena?.dirty)" class="error">
+      <small *ngIf="contrasena?.errors?.['required']">La contraseña es obligatoria.</small>
+      <small *ngIf="contrasena?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</small>
+    </div>
 
-      <button [routerLink]="['/inicio']" type="button">Registrarse</button>
-      <button [routerLink]="['/login']" type="button">
-        Ya tengo cuenta
-      </button>
-    </form>
-  </div>
+    <!-- Error general -->
+    <div *ngIf="errorMessage" class="error">
+      <small>{{ errorMessage }}</small>
+    </div>
+
+    <button type="submit">Registrarse</button>
+    <button type="button" [routerLink]="['/login']">Volver a Iniciar Sesión</button>
+  </form>
 </div>

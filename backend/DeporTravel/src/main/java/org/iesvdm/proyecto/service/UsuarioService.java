@@ -33,7 +33,7 @@ public class UsuarioService {
     public Optional<Usuario> updateUsuario(Long id, Usuario usuarioDetails) {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setNombre(usuarioDetails.getNombre());
-            usuario.setApellidos(usuarioDetails.getApellidos());
+            usuario.setApellido(usuarioDetails.getApellido());
             usuario.setCorreoElectronico(usuarioDetails.getCorreoElectronico());
             usuario.setContrasena(usuarioDetails.getContrasena());
             return usuarioRepository.save(usuario);

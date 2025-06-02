@@ -31,7 +31,7 @@ public class Usuario {
 
     @NotBlank(message = "El apellido no puede estar vacío")
     @Size(min = 3, message = "El apellido debe tener al menos 3 caracteres")
-    private String apellidos;
+    private String apellido;
 
     @NotBlank(message = "El correo electrónico no puede estar vacío")
     @Email(message = "Debe ser un correo electrónico válido")
@@ -49,10 +49,10 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Rol> roles = new HashSet<>();
 
-    public Usuario(String nombre,String apellidos, String correoElectronico, String contrasena) {
+    public Usuario(String nombre,String apellido, String correoElectronico, String contrasena) {
 
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         this.correoElectronico = correoElectronico;
         this.contrasena = contrasena;
 

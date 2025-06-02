@@ -19,11 +19,11 @@ import { AuthService } from '../../services/auth.service';
 })
 export class IniciarSesionComponent implements OnInit {
   loginForm!: FormGroup;
-
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  mostrarContrasena: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -38,7 +38,7 @@ export class IniciarSesionComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9._%+-]+@test.com$'),
+          Validators.pattern('^[a-zA-Z0-9._%+-]+@gmail.com$'),
         ],
       ],
       contrasena: ['', [Validators.required]],
@@ -47,8 +47,8 @@ export class IniciarSesionComponent implements OnInit {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
-      this.router.navigateByUrl('index').then(() => {
-        console.log('Ya logueado, cargando index.');
+      this.router.navigateByUrl('/inicio').then(() => {
+        console.log('Ya logueado, cargando inicio.');
       });
     }
   }
@@ -68,16 +68,25 @@ export class IniciarSesionComponent implements OnInit {
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        console.log('isLoggedIn = ' + this.isLoggedIn);
         this.roles = this.storageService.getUser().roles;
-        console.log(this.storageService.getUser());
         this.router.navigateByUrl('/inicio');
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        if (err.error?.message === 'Usuario no encontrado') {
+          this.errorMessage = 'No existe ese usuario.';
+        } else if (err.status === 404) {
+          this.errorMessage = 'No existe ese usuario.';
+        } else {
+          this.errorMessage = 'Error al iniciar sesión. Inténtalo de nuevo.';
+        }
+
         this.isLoginFailed = true;
       },
     });
+  }
+
+  VerOcultarContrasena(): void {
+    this.mostrarContrasena = !this.mostrarContrasena;
   }
 
   get contrasena() {

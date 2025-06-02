@@ -45,7 +45,7 @@ public class UserDetailsImpl implements UserDetails {
         return new UserDetailsImpl(
                 user.getId(),
                 user.getNombre(),
-                user.getApellidos(),
+                user.getApellido(),
                 user.getCorreoElectronico(),
                 user.getContrasena(),
                 authorities);
@@ -72,6 +72,10 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return correoElectronico;
+    }
+
+    public String getNombre() {
+        return nombre;
     }
 
     public String getApellidos() {

@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -45,24 +46,37 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+        Optional<Usuario> usuarioOptional = userRepository.findByCorreoElectronico(loginRequest.getCorreoElectronico());
+
+        if (usuarioOptional.isEmpty()) {
+            return ResponseEntity.status(404).body(Map.of("message", "Usuario no encontrado"));
+        }
+
+        Usuario usuario = usuarioOptional.get();
+
+        if (!encoder.matches(loginRequest.getContrasena(), usuario.getContrasena())) {
+            return ResponseEntity.status(401).body(Map.of("message", "Contraseña incorrecta"));
+        }
+
+        // Usuario y contraseña correctos, crear token
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getCorreoElectronico(), loginRequest.getContrasena()));
+                new UsernamePasswordAuthenticationToken(loginRequest.getCorreoElectronico(), loginRequest.getContrasena())
+        );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenUtils.generateToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
         Map<String, Object> response = new HashMap<>();
-
         response.put("token", token);
         response.put("id", userDetails.getId());
-        response.put("username", userDetails.getUsername());
+        response.put("nombre", userDetails.getNombre());
         response.put("apellidos", userDetails.getApellidos());
-        response.put("email", userDetails.getCorreoElectronico());
+        response.put("correoElectronico", userDetails.getCorreoElectronico());
         response.put("roles", roles);
 
         return ResponseEntity.ok(response);
@@ -81,7 +95,7 @@ public class AuthController {
 
         // Create new user's account
         Usuario user = new Usuario(registerRequest.getNombre(),
-                registerRequest.getApellidos(),
+                registerRequest.getApellido(),
                 registerRequest.getCorreoElectronico(),
                 encoder.encode(registerRequest.getContrasena())
         );

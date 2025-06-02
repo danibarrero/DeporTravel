@@ -3,8 +3,8 @@ import { ActividadesComponent } from './components/actividades/actividades.compo
 import { IniciarSesionComponent } from './components/login/login.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { Routes } from '@angular/router';
-import { RegistrarseComponent } from './components/registrarse/registrarse.component';
 import { SobreNosotrosComponent } from './components/sobre-nosotros/sobre-nosotros.component';
+import { RegistrarseComponent } from './components/registrarse/registrarse.component';
 
 export const routes: Routes = [
   {
@@ -33,7 +33,7 @@ export const routes: Routes = [
     title: 'login'
   },
   {
-    path: 'registrarse',
+    path: 'register',
     component: RegistrarseComponent,
     title: 'Registrarse'
   },

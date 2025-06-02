@@ -48,7 +48,7 @@ public class IntegracionCompleta {
         Usuario usuario1 = usuarioService.createUsuario(
                 Usuario.builder()
                         .nombre("Juan")
-                        .apellidos("Pérez")
+                        .apellido("Pérez")
                         .correoElectronico("juan@gmail.com")
                         .contrasena(passwordEncoder.encode("123abc"))
                         .roles(Set.of(rolAdmin))
@@ -57,7 +57,7 @@ public class IntegracionCompleta {
         Usuario usuario2 = usuarioService.createUsuario(
                 Usuario.builder()
                         .nombre("Ana")
-                        .apellidos("García")
+                        .apellido("García")
                         .correoElectronico("ana@gmail.com")
                         .contrasena(passwordEncoder.encode("123abc"))
                         .roles(Set.of(rolUser))

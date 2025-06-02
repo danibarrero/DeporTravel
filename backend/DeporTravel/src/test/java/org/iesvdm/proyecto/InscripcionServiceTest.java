@@ -45,7 +45,7 @@ public class InscripcionServiceTest {
 
         usuario = usuarioRepository.save(Usuario.builder()
                 .nombre("Carlos")
-                .apellidos("Martinez")
+                .apellido("Martinez")
                 .correoElectronico("carlos@mail.com")
                 .contrasena("pass123")
                 .build());

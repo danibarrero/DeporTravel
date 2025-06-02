@@ -42,7 +42,7 @@ public class ComentarioServiceTest {
 
         Usuario usuario = Usuario.builder()
                 .nombre("Juan")
-                .apellidos("Pérez")
+                .apellido("Pérez")
                 .correoElectronico("juan@mail.com")
                 .contrasena("password123")
                 .build();

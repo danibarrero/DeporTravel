@@ -32,7 +32,7 @@ public class UsuarioServiceTest {
     public void testCreateUsuario() {
         Usuario usuario = Usuario.builder()
                 .nombre("Juan")
-                .apellidos("Perez")
+                .apellido("Perez")
                 .correoElectronico("juan@mail.com")
                 .contrasena("123abc")
                 .build();
@@ -48,14 +48,14 @@ public class UsuarioServiceTest {
     public void testGetAllUsuarios() {
         Usuario usuario1 = Usuario.builder()
                 .nombre("Juan")
-                .apellidos("Perez")
+                .apellido("Perez")
                 .correoElectronico("juan@mail.com")
                 .contrasena("123abc")
                 .build();
 
         Usuario usuario2 = Usuario.builder()
                 .nombre("Ana")
-                .apellidos("Gomez")
+                .apellido("Gomez")
                 .correoElectronico("ana@mail.com")
                 .contrasena("123abc")
                 .build();
@@ -74,7 +74,7 @@ public class UsuarioServiceTest {
     public void testUpdateUsuario() {
         Usuario usuario = Usuario.builder()
                 .nombre("Miguel")
-                .apellidos("Hernandez")
+                .apellido("Hernandez")
                 .correoElectronico("miguel@mail.com")
                 .contrasena("123abc")
                 .build();
@@ -83,7 +83,7 @@ public class UsuarioServiceTest {
 
         Usuario updateDetails = new Usuario();
         updateDetails.setNombre("Miguel");
-        updateDetails.setApellidos("Barrero");
+        updateDetails.setApellido("Barrero");
         updateDetails.setCorreoElectronico(savedUsuario.getCorreoElectronico());
         updateDetails.setContrasena("456xyz");
 
@@ -93,7 +93,7 @@ public class UsuarioServiceTest {
 
         Usuario updatedUsuario = updatedUsuarioOpt.get();
 
-        assertEquals("Barrero", updatedUsuario.getApellidos(), "El apellido no se actualizó correctamente");
+        assertEquals("Barrero", updatedUsuario.getApellido(), "El apellido no se actualizó correctamente");
         assertEquals("456xyz", updatedUsuario.getContrasena(), "La contraseña no se actualizó correctamente");
     }
 
@@ -102,7 +102,7 @@ public class UsuarioServiceTest {
     public void testDeleteUsuario() {
         Usuario usuario = Usuario.builder()
                 .nombre("Miguel")
-                .apellidos("Hernandez")
+                .apellido("Hernandez")
                 .correoElectronico("miguel@mail.com")
                 .contrasena("123abc")
                 .build();
@@ -123,7 +123,7 @@ public class UsuarioServiceTest {
     public void testGetUsuarioById() {
         Usuario usuario = Usuario.builder()
                 .nombre("Carlos")
-                .apellidos("Ramirez")
+                .apellido("Ramirez")
                 .correoElectronico("carlos@mail.com")
                 .contrasena("123abc")
                 .build();

@@ -1,0 +1,59 @@
+<div class="auth-container">
+  <div class="background"></div>
+
+  <form
+    class="auth-box"
+    [formGroup]="paypalForm"
+    (ngSubmit)="onSubmit()"
+    *ngIf="showFormPaypal"
+    novalidate
+  >
+    <div class="form-back-button" (click)="goBack()" title="Volver">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
+    <h2>Pago con PayPal</h2>
+
+    <div class="input-group">
+      <i class="fas fa-credit-card"></i>
+      <input type="text" formControlName="method" readonly />
+    </div>
+
+    <div class="input-group">
+      <i [ngClass]="currencyIcon"></i>
+      <input type="number" formControlName="amount" readonly />
+    </div>
+
+    <div class="input-group">
+      <i class="fas fa-coins"></i>
+      <select formControlName="currency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+      </select>
+    </div>
+
+    <button type="submit">Pagar con PayPal</button>
+  </form>
+
+  <div *ngIf="procesando" class="auth-box estado">
+    <img src="loading-spinner.gif" alt="Procesando" />
+    <p>Procesando pago...</p>
+  </div>
+
+  <div *ngIf="cancelado" class="auth-box alerta error">
+    <strong>¡Pago cancelado!</strong>
+    <p>El proceso fue cancelado. Intenta nuevamente.</p>
+    <a (click)="onClose()" class="cerrar-btn">Cerrar</a>
+  </div>
+
+  <div
+    *ngIf="!showFormPaypal && !procesando && !cancelado"
+    class="auth-box alerta exito"
+  >
+    <strong>¡Éxito!</strong>
+    <p>Tu pago fue procesado correctamente.</p>
+    <a (click)="onClose()" class="cerrar-btn">Cerrar</a>
+  </div>
+</div>

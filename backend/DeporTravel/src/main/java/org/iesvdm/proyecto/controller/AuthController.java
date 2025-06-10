@@ -75,7 +75,7 @@ public class AuthController {
         response.put("token", token);
         response.put("id", userDetails.getId());
         response.put("nombre", userDetails.getNombre());
-        response.put("apellidos", userDetails.getApellidos());
+        response.put("apellido", userDetails.getApellido());
         response.put("correoElectronico", userDetails.getCorreoElectronico());
         response.put("roles", roles);
 
@@ -85,48 +85,35 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
-        if (userRepository.existsByNombre(registerRequest.getNombre())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username ya en uso!"));
+        // Validación de campos
+        if (registerRequest.getNombre() == null || registerRequest.getApellido() == null ||
+                registerRequest.getCorreoElectronico() == null || registerRequest.getContrasena() == null) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Todos los campos son obligatorios"));
         }
 
+        // Verificar usuario existente
         if (userRepository.existsByCorreoElectronico(registerRequest.getCorreoElectronico())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email ya en uso!"));
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: El correo electrónico ya está en uso"));
         }
 
         // Create new user's account
-        Usuario user = new Usuario(registerRequest.getNombre(),
+        Usuario usuario = new Usuario(
+                registerRequest.getNombre(),
                 registerRequest.getApellido(),
                 registerRequest.getCorreoElectronico(),
                 encoder.encode(registerRequest.getContrasena())
         );
 
-        Set<String> strRoles = registerRequest.getRoles();
-        Set<Rol> roles = new HashSet<>();
+        // Asignar rol USER por defecto
+        Rol userRole = rolRepository.findByRol(ERol.USER)
+                .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado"));
+        usuario.setRoles(Collections.singleton(userRole));
 
-        if (strRoles == null) {
-            Rol userRole = rolRepository.findByRol(ERol.USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Rol adminRole = rolRepository.findByRol(ERol.ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-                        roles.add(adminRole);
-
-                        break;
-
-                    default:
-                        Rol userRole = rolRepository.findByRol(ERol.USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Rol no encontrado."));
-                        roles.add(userRole);
-                }
-            });
-        }
-
-        user.setRoles(roles);
-        userRepository.save(user);
+        userRepository.save(usuario);
 
         return ResponseEntity.ok(new MessageResponse("Usuario registrado correctamente!"));
     }

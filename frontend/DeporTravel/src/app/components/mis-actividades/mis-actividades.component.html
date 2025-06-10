@@ -1,0 +1,22 @@
+<div class="mis-actividades-container">
+  <h2>Mis Actividades Inscritas</h2>
+
+  <div *ngIf="actividades && actividades.length > 0; else noActividades">
+    <ul class="actividad-lista">
+      <li *ngFor="let actividad of actividades" class="actividad-item">
+        <h3 class="actividad-nombre">{{ actividad.nombre }}</h3>
+        <p class="actividad-descripcion">{{ actividad.descripcion }}</p>
+        <p class="actividad-detalle">
+          <strong>Fecha:</strong> {{ actividad.fecha | date : "longDate" }}
+        </p>
+        <p class="actividad-detalle">
+          <strong>País:</strong> {{ actividad.pais }}
+        </p>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #noActividades>
+    <p class="sin-actividades">No estás inscrito en ninguna actividad.</p>
+  </ng-template>
+</div>

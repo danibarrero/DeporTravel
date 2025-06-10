@@ -70,7 +70,19 @@
             {{ usuario?.nombre }}
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#">Configuración</a></li>
+            <li *ngIf="usuario?.roles?.includes('USER')">
+              <a class="dropdown-item" [routerLink]="['/perfil']">Perfil</a>
+            </li>
+            <li *ngIf="usuario?.roles?.includes('USER')">
+              <a class="dropdown-item" [routerLink]="['/mis-actividades']"
+                >Mis Viajes</a
+              >
+            </li>
+            <li *ngIf="usuario?.roles?.includes('ADMIN')">
+              <a class="dropdown-item" [routerLink]="['/administrar']"
+                >Administrar</a
+              >
+            </li>
             <li>
               <a
                 class="dropdown-item"

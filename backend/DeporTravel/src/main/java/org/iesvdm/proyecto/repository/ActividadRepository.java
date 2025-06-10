@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -20,9 +21,16 @@ public interface ActividadRepository extends JpaRepository<Actividad, Long> {
 
     // Filtra por pais con paginación
     @Query("SELECT ac FROM Actividad ac WHERE ac.pais = :pais")
-    Page<Actividad> findByPais(String pais, Pageable pageable);
+    Page<Actividad> findByPaisPaginable(String pais, Pageable pageable);
 
     // Filtrar por fecha
     @Query("SELECT a FROM Actividad a WHERE a.fecha = :fecha")
     Optional<Actividad> findByFecha(LocalDate fecha);
+
+    @Query("SELECT DISTINCT ac.categoria FROM Actividad ac")
+    List<String> findByCategoria();
+
+    @Query("SELECT DISTINCT a.pais FROM Actividad a")
+    List<String> findByPais();
+
 }

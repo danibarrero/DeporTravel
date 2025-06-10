@@ -2,16 +2,43 @@
   <!-- Separador del header -->
   <div class="separador-header"></div>
 
-  <!-- Buscador -->
-  <div class="buscador mb-4">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Buscar actividad..."
-      [(ngModel)]="busqueda"
-    />
+  <!-- Filtros -->
+  <div class="buscador mb-4 row g-2 justify-content-center align-items-center">
+    <!-- Filtro por nombre (simple) -->
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar actividad..."
+        [(ngModel)]="busqueda"
+      />
+    </div>
+
+    <!-- Filtro por categoría -->
+    <div class="col-md-4">
+      <select class="form-select shadow-sm" [(ngModel)]="filtroCategoria">
+        <option value="">Todas las categorías</option>
+        <option *ngFor="let categoria of categorias" [value]="categoria">
+          {{ categoria }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Filtro por país -->
+    <div class="col-md-4">
+      <select class="form-select shadow-sm" [(ngModel)]="filtroPais">
+        <option value="">Todos los países</option>
+        <option *ngFor="let pais of paises" [value]="pais">
+          {{ pais }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Botón Limpiar filtros -->
+    <div class="col-md-1">
+      <button class="btn-limpiar" (click)="limpiarFiltros()">Limpiar</button>
+    </div>
   </div>
-  <!-- Fin buscador -->
 
   <!-- Actividades -->
   <div class="row justify-content-center align-items-stretch">
@@ -19,42 +46,37 @@
       class="col-md-4 d-flex mb-4"
       *ngFor="let actividad of actividadesFiltradas"
     >
-      <!-- Tarjeta -->
       <div
         class="card shadow d-flex flex-column h-100"
         style="cursor: pointer"
         (click)="goToActividad(actividad.id)"
       >
-        <!-- Imagen -->
-        <img
-          [src]="actividad.imagen"
-          class="card-img-top custom-card-img"
-        />
-
-        <!-- Contenido -->
+        <img [src]="actividad.imagen" class="card-img-top custom-card-img" />
         <div class="card-body">
           <h5 class="card-title">{{ actividad.nombre }}</h5>
           <ul class="list-unstyled">
             <li><i class="fas fa-dumbbell"></i> {{ actividad.categoria }}</li>
-            <li><i class="fas fa-calendar-alt"></i> {{ actividad.fecha }}</li>
+            <li>
+              <i class="fas fa-calendar-alt"></i>
+              {{ actividad.fecha | date : "longDate" }}
+            </li>
             <li><i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}</li>
             <li><i class="fas fa-euro-sign"></i> {{ actividad.precio }}€</li>
           </ul>
         </div>
-
-        <!-- Botón de Añadir -->
         <div class="card-footer">
           <button
             class="btn btn-outline-primary add-to-cart"
-            (click)="$event.stopPropagation()"
+            (click)="comprarActividad(actividad, $event)"
           >
-            <i class="fas fa-shopping-cart"></i> Añadir
+            <i class="fas fa-shopping-cart"></i> Comprar
           </button>
         </div>
-        <!-- Fin Botón de Añadir -->
       </div>
     </div>
-    <!-- Fin Tarjeta -->
+    <!-- Mensaje cuando no hay actividades -->
+    <div *ngIf="actividadesFiltradas.length === 0" class="col-12 mensaje">
+      <p>No se encontraron actividades que coincidan con los filtros.</p>
+    </div>
   </div>
-  <!-- Fin Actividades -->
 </main>

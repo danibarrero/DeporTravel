@@ -18,7 +18,10 @@
 <div class="container-xl viajes-section">
   <!-- Fila de Actividades -->
   <div class="row justify-content-center align-items-stretch">
-    <div class="col-md-4 mb-4 d-flex" *ngFor="let actividad of actividadesFiltradas">
+    <div
+      class="col-md-4 mb-4 d-flex"
+      *ngFor="let actividad of actividadesFiltradas.slice(0, 3)"
+    >
       <!-- Tarjeta clicable -->
       <div
         class="card shadow d-flex flex-column h-100"
@@ -26,10 +29,7 @@
         (click)="goToActividad(actividad.id)"
       >
         <!-- Imagen -->
-        <img
-          [src]="actividad.imagen"
-          class="card-img-top custom-card-img"
-        />
+        <img [src]="actividad.imagen" class="card-img-top custom-card-img" />
         <div class="card-body">
           <!-- Título -->
           <h5 class="card-title">{{ actividad.nombre }}</h5>
@@ -37,19 +37,22 @@
           <!-- Detalles -->
           <ul class="list-unstyled">
             <li><i class="fas fa-dumbbell"></i> {{ actividad.categoria }}</li>
-            <li><i class="fas fa-calendar-alt"></i> {{ actividad.fecha }}</li>
+            <li>
+              <i class="fas fa-calendar-alt"></i>
+              {{ actividad.fecha | date : "longDate" }}
+            </li>
             <li><i class="fas fa-map-marker-alt"></i> {{ actividad.pais }}</li>
             <li><i class="fas fa-euro-sign"></i> {{ actividad.precio }}€</li>
           </ul>
         </div>
 
-        <!-- Botón Añadir con ícono de carrito -->
+        <!-- Botón Comprar -->
         <div class="card-footer d-flex justify-content-end">
           <button
             class="btn btn-outline-primary add-to-cart"
-            (click)="$event.stopPropagation()"
+            (click)="comprarActividad(actividad); $event.stopPropagation()"
           >
-            <i class="fas fa-shopping-cart"></i> Añadir
+            <i class="fas fa-shopping-cart"></i> Comprar
           </button>
         </div>
       </div>

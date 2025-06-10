@@ -46,4 +46,9 @@ public class ComentarioController {
         return comentarioService.createComentarioByIds(idUsuario, idActividad, comentario);
     }
 
+    @GetMapping("/actividad/{idActividad}")
+    public List<Comentario> getComentariosByActividad(@PathVariable Long idActividad) {
+        return comentarioRepository.findByActividadId(idActividad);
+    }
+
 }

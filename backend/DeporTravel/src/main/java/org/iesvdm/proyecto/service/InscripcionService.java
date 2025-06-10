@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InscripcionService {
@@ -63,4 +64,14 @@ public class InscripcionService {
         return inscripcionRepository.save(inscripcion);
     }
 
+    public boolean existeInscripcion(Long idUsuario, Long idActividad) {
+        return inscripcionRepository.existsByUsuarioIdAndActividadId(idUsuario, idActividad);
+    }
+
+    public List<Actividad> findActividadesByUsuarioId(Long usuarioId) {
+        List<Inscripcion> inscripciones = inscripcionRepository.findByUsuarioId(usuarioId);
+        return inscripciones.stream()
+                .map(Inscripcion::getActividad)
+                .collect(Collectors.toList());
+    }
 }

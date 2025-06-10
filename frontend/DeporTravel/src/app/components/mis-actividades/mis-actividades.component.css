@@ -1,0 +1,60 @@
+.mis-actividades-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 15px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  margin-top: 2rem;
+  color: #2c3e50;
+}
+
+.actividad-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.actividad-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+
+.actividad-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.actividad-nombre {
+  margin: 0 0 10px 0;
+  color: black;
+}
+
+.actividad-descripcion {
+  margin: 0 0 10px 0;
+  font-style: italic;
+  color: #555;
+}
+
+.actividad-detalle {
+  margin: 3px 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.sin-actividades {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #999;
+  margin-top: 40px;
+  font-style: italic;
+}

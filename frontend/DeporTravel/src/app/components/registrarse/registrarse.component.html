@@ -2,6 +2,10 @@
   <div class="background"></div>
 
   <form class="auth-box" [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="form-back-button" (click)="goBack()" title="Volver">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
     <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
     <h2>Registrarse</h2>
 
@@ -75,6 +79,5 @@
     </div>
 
     <button type="submit">Registrarse</button>
-    <button type="button" [routerLink]="['/login']">Volver a Iniciar Sesión</button>
   </form>
 </div>

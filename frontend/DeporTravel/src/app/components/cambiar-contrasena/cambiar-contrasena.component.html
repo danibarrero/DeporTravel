@@ -1,0 +1,38 @@
+<div class="perfil-container">
+  <div class="perfil-box">
+    <div class="form-back-button" (click)="goBack()" title="Volver">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
+    <h2>Restablecer Contraseña</h2>
+
+    <form [formGroup]="formRecuperar" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="nueva">Nueva contraseña</label>
+        <input id="nueva" type="password" formControlName="contrasena" />
+      </div>
+
+      <div class="input-group">
+        <label for="repetir">Repite la contraseña</label>
+        <input
+          id="repetir"
+          type="password"
+          formControlName="repetirContrasena"
+        />
+        <div
+          class="error"
+          *ngIf="
+            formRecuperar.hasError('noCoincide') &&
+            formRecuperar.get('repetirContrasena')?.touched
+          "
+        >
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+
+      <button class="save-password" type="submit" [disabled]="formRecuperar.invalid">
+        Guardar Contraseña
+      </button>
+    </form>
+  </div>
+</div>

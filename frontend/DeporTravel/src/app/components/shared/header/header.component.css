@@ -1,16 +1,38 @@
 /* Contenedor principal del header */
 #header-container {
   width: 100%;
-  padding: 0 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 1200px; /* Ajusta al ancho que quieras */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
 }
 
-/* Estructura base del navbar */
+/* Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: space-between; /* Igual espacio entre logo y menú */
+  align-items: center;
+  flex-wrap: nowrap;
   padding-top: 2rem;
   width: 100%;
+  margin: 0; /* Elimina margen por defecto */
+  padding-left: 0; /* Evita padding extra de Bootstrap */
+  padding-right: 0;
+}
+
+/* La fila interna dentro del navbar */
+.navbar > .row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0; /* Sin margen para no afectar el layout */
+  padding: 0;
+}
+
+/* Parte izquierda - logo */
+#logo {
+  max-height: 70px;
 }
 
 /* Parte derecha del navbar */
@@ -18,11 +40,6 @@
   display: flex;
   align-items: center;
   gap: 15px;
-}
-
-/* Logo */
-#logo {
-  max-height: 70px;
 }
 
 /* Enlaces */
@@ -75,6 +92,7 @@
   color: #fff;
 }
 
+/* Dropdown usuario */
 .user-dropdown .dropdown-menu {
   text-align: center;
   border-radius: 8px;
@@ -108,34 +126,38 @@
 /* ----------------------------- */
 @media (max-width: 768px) {
   #header-container {
-    padding: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .navbar {
     flex-direction: column;
+    justify-content: center; /* Centrar en móvil */
     align-items: center;
     padding-top: 1rem;
-    width: 100%;
   }
 
-  .navbar .row {
+  /* La fila también en columna para centrar */
+  .navbar > .row {
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 0;
   }
 
   #logo {
+    margin-bottom: 1rem;
     max-width: 80%;
     height: auto;
   }
 
   #navbar-right {
+    width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-top: 1rem;
-    width: 100%;
+    margin-top: 0;
   }
 
   .navbar-link,

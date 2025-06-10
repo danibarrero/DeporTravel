@@ -1,7 +1,5 @@
 <body style="background: linear-gradient(to bottom, white, #edc981)">
-  <header
-    *ngIf="showHeaderAndFooter"
-  >
+  <header *ngIf="showHeaderAndFooter || showOnlyHeader">
     <app-header></app-header>
   </header>
 

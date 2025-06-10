@@ -1,0 +1,33 @@
+<div class="perfil-container">
+  <div class="perfil-box">
+    <form [formGroup]="perfilForm">
+      <div class="header-with-back">
+        <div class="form-back-button" (click)="goBack()" title="Volver">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <h2>Bienvenido/a, {{ usuario?.nombre }}</h2>
+      </div>
+
+      <div class="input-group">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" formControlName="nombre" readonly />
+      </div>
+
+      <div class="input-group">
+        <label for="apellido">Apellido</label>
+        <input id="apellido" formControlName="apellido" readonly />
+      </div>
+
+      <div class="input-group">
+        <label for="correo">Correo</label>
+        <input id="correo" formControlName="correo" readonly />
+      </div>
+
+      <div class="forgot-password-link">
+        <a href="#" (click)="irCambiarContrasena($event)"
+          >¿Olvidaste tu contraseña?</a
+        >
+      </div>
+    </form>
+  </div>
+</div>

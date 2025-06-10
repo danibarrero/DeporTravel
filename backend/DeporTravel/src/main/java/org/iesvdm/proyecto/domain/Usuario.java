@@ -39,8 +39,8 @@ public class Usuario {
     private String correoElectronico;
 
     @NotBlank(message = "La contraseña no puede estar vacía")
-    @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",
-            message = "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números")
+    // @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$",
+    //         message = "La contraseña debe tener al menos 6 caracteres, incluyendo letras y números")
     private String contrasena;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -58,12 +58,12 @@ public class Usuario {
 
     }
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @Builder.Default
     @JsonIgnore
     private Set<Comentario> comentarios = new HashSet<>();
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @Builder.Default
     @JsonIgnore
     private Set<Inscripcion> inscripciones = new HashSet<>();

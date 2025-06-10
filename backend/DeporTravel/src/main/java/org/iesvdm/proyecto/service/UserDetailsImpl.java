@@ -18,7 +18,7 @@ public class UserDetailsImpl implements UserDetails {
 
     private String nombre;
 
-    private String apellidos;
+    private String apellido;
 
     private String correoElectronico;
 
@@ -27,11 +27,11 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String nombre, String apellidos,  String correoElectronico, String contrasena,
+    public UserDetailsImpl(Long id, String nombre, String apellido,  String correoElectronico, String contrasena,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         this.correoElectronico = correoElectronico;
         this.contrasena = contrasena;
         this.authorities = authorities;
@@ -78,8 +78,8 @@ public class UserDetailsImpl implements UserDetails {
         return nombre;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getApellido() {
+        return apellido;
     }
 
     @Override

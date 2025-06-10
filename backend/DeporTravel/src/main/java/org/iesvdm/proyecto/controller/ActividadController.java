@@ -44,15 +44,6 @@ public class ActividadController {
         return actividades;
     }
 
-    @GetMapping("/actividadesByPais")
-    public Page<Actividad> getActividadesByPais(
-            @RequestParam String pais,
-            @RequestParam(defaultValue = "0") int page, // Para saber por qué página empieza
-            @RequestParam(defaultValue = "2") int size, // Esto es que va a tener 2 actividades por página
-            @RequestParam(defaultValue = "nombre") String sortBy) { // Sirve para que se ordenen por nombre
-        return actividadService.getActividadesByPaisPaginable(pais, page, size, sortBy);
-    }
-
     @GetMapping("/actividadesByFecha")
     public Actividad getActividadesByFecha(@RequestParam LocalDate fecha) {
         return actividadRepository.findByFecha(fecha)
@@ -64,6 +55,22 @@ public class ActividadController {
         Actividad actividad = actividadRepository.findById(id)
                 .orElseThrow(() -> new ActividadNotFoundException(id));
         actividadRepository.delete(actividad);
+    }
+
+    @GetMapping("/{id}")
+    public Actividad getActividadById(@PathVariable Long id) {
+        return actividadRepository.findById(id)
+                .orElseThrow(() -> new ActividadNotFoundException(id));
+    }
+
+    @GetMapping("/categorias")
+    public List<String> getCategorias() {
+        return actividadService.getCategoria();
+    }
+
+    @GetMapping("/paises")
+    public List<String> getAllPaises() {
+        return actividadService.getPais();
     }
 
 }

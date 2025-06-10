@@ -48,11 +48,21 @@ public class ActividadService {
     // Filtrar por país con paginación
     public Page<Actividad> getActividadesByPaisPaginable(String pais, int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return actividadRepository.findByPais(pais, pageable);
+        return actividadRepository.findByPaisPaginable(pais, pageable);
     }
 
     // Filtrar por fecha
     public Optional<Actividad> getActividadesByFecha(LocalDate fecha) {
         return actividadRepository.findByFecha(fecha);
     }
+
+    public List<String> getCategoria() {
+        return actividadRepository.findByCategoria();
+    }
+
+    public List<String> getPais() {
+        return actividadRepository.findByPais();
+    }
+
+
 }

@@ -1,33 +1,27 @@
-/* Estilo general para la imagen de la actividad */
+/* Contenedor principal con algo de padding */
+.actividad-container {
+  padding: 0 1rem;
+}
+
+/* Imagen: que ocupe el 100% y con altura ajustable */
 .actividad-image {
   max-height: 400px;
-  object-fit: cover;
   width: 100%;
+  object-fit: cover;
   border-radius: 8px;
   transition: transform 0.3s ease;
   margin-top: 2rem;
 }
 
-/* Estilo general para botones de acción */
-.btn-atras,
-.btn-add-to-cart {
-  background-color: white;
-  color: black;
-  border: 1.5px solid transparent;
-  padding: 8px 17px;
-  border-radius: 5px;
-  font-weight: 600;
-  transition: color 0.3s ease;
+/* Título y precio en fila para desktop */
+.actividad-title-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/* Hover para ambos botones */
-.btn-atras:hover,
-.btn-add-to-cart:hover {
-  color: #edc981; /* Color dorado al pasar el ratón */
-  cursor: pointer;
-}
-
-/* Estilos para título y precio */
 .actividad-title,
 .actividad-price {
   font-size: 1.75rem;
@@ -35,16 +29,8 @@
   margin-bottom: 1rem;
 }
 
-/* Estilo mejorado para la ubicación */
-.actividad-location {
-  font-size: 1.1rem;
-  color: black;
-  line-height: 1.5;
-  font-weight: 500;
-  margin-bottom: 15px;
-}
-
-/* Estilo mejorado para la fecha */
+/* Ubicación y fecha */
+.actividad-location,
 .actividad-date {
   font-size: 1.1rem;
   color: black;
@@ -53,7 +39,14 @@
   margin-bottom: 15px;
 }
 
-/* Estilo mejorado para la descripción */
+/* Íconos con espacio */
+.actividad-location i,
+.actividad-date i {
+  margin-right: 10px;
+  color: black;
+}
+
+/* Descripción */
 .actividad-description {
   font-size: 1.1rem;
   color: black;
@@ -63,27 +56,62 @@
   margin-bottom: 15px;
 }
 
-/* Estilo para los íconos de ubicación y fecha */
-.actividad-location i,
-.actividad-date i {
-  margin-right: 10px;
-  color: black;
+/* Botones alineados */
+.actividad-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
 }
 
-/* Línea separadora antes de los comentarios */
+.btn-atras,
+.btn-add-to-cart {
+  background-color: white;
+  color: black;
+  border: 1.5px solid transparent;
+  padding: 8px 17px;
+  border-radius: 5px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+}
+
+.btn-atras:hover,
+.btn-add-to-cart:hover {
+  color: #edc981;
+  cursor: pointer;
+}
+
+/* 🔧 Fix: evitar fondo gris al hacer clic en botones */
+.btn-atras:focus,
+.btn-add-to-cart:focus,
+.btn-comentar:focus,
+.btn-atras:active,
+.btn-add-to-cart:active,
+.btn-comentar:active {
+  outline: none;
+  box-shadow: none;
+  background-color: white;
+}
+
+/* Separador */
 .comentarios-separador {
   height: 2px;
   background-color: black;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
-/* Título de la sección de comentarios */
+/* Comentarios */
 .actividad-comments h4 {
   margin-bottom: 1rem;
   font-weight: 600;
 }
 
-/* Área de texto para escribir comentarios */
+/* Textarea */
 .comentario-textarea {
   width: 100%;
   padding: 8px;
@@ -94,7 +122,7 @@
   margin-bottom: 1rem;
 }
 
-/* Botón para enviar comentario */
+/* Botón enviar comentario */
 .btn-comentar {
   background-color: white;
   color: black;
@@ -103,10 +131,62 @@
   border-radius: 5px;
   font-weight: 600;
   transition: color 0.3s ease;
+  min-width: 120px;
+  text-align: center;
 }
 
-/* Hover del botón de comentar */
 .btn-comentar:hover {
   color: #edc981;
   cursor: pointer;
+}
+
+/* ------------------ */
+/* Responsive Breakpoints */
+/* ------------------ */
+
+@media (max-width: 768px) {
+  .actividad-title-price {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .actividad-title,
+  .actividad-price {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .actividad-button-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-atras,
+  .btn-add-to-cart,
+  .btn-comentar {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .actividad-location,
+  .actividad-date {
+    font-size: 1rem;
+  }
+
+  .comentario-textarea {
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .actividad-title,
+  .actividad-price {
+    font-size: 1.25rem;
+  }
+
+  .actividad-location,
+  .actividad-date,
+  .actividad-description {
+    font-size: 0.95rem;
+  }
 }

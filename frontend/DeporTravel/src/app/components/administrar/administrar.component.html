@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Administrar Usuarios</h2>
+
+  <!-- Tabla de usuarios -->
+  <table *ngIf="!cargando && !error && usuarios.length > 0" border="1" cellpadding="5" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios;">
+        <td>{{ usuario.id }}</td>
+
+        <td *ngIf="editandoUsuarioId !== usuario.id">{{ usuario.nombre }}</td>
+        <td *ngIf="editandoUsuarioId === usuario.id">
+          <input [(ngModel)]="usuarioEditado.nombre" placeholder="Nombre" />
+        </td>
+
+        <td *ngIf="editandoUsuarioId !== usuario.id">{{ usuario.correoElectronico }}</td>
+        <td *ngIf="editandoUsuarioId === usuario.id">
+          <input [(ngModel)]="usuarioEditado.correoElectronico" type="email" placeholder="Email" />
+        </td>
+
+        <td>
+          <button *ngIf="editandoUsuarioId !== usuario.id" (click)="editarUsuario(usuario)">
+            Editar
+          </button>
+          <button *ngIf="editandoUsuarioId === usuario.id" (click)="guardarUsuario()">
+            Guardar
+          </button>
+          <button *ngIf="editandoUsuarioId === usuario.id" (click)="cancelarEdicion()">
+            Cancelar
+          </button>
+          <button (click)="eliminarUsuario(usuario.id)" class="delete-btn">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info" *ngIf="!cargando">
+    <h3>Info:</h3>
+    <p>Total usuarios: {{ usuarios.length }}</p>
+  </div>
+</div>

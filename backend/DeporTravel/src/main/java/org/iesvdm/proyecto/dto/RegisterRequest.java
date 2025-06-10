@@ -18,7 +18,6 @@ public class RegisterRequest {
     private String apellido;
 
     @NotBlank
-    @Size(min = 6)
     private String contrasena;
 
     @NotBlank

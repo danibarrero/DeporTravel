@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ActividadService } from '../../services/actividad.service';
-import { Comentario, ComentarioService } from '../../services/comentario.service';
+import {
+  Comentario,
+  ComentarioService,
+} from '../../services/comentario.service';
 import { FormsModule } from '@angular/forms';
+import { StorageService } from './../../services/storge.service';
 
 export interface Actividad {
   id: number;
@@ -24,77 +28,106 @@ export interface Actividad {
   styleUrls: ['./actividad.component.css'],
 })
 export class ActividadComponent implements OnInit {
-  busqueda: string = '';
-  data: Actividad[] = [];
+  actividad: Actividad | undefined;
   comentarios: Comentario[] = [];
   nuevoComentario: string = '';
+  usuario: any = null;
+  data: any;
 
   constructor(
-    private actividadservice: ActividadService,
-    private comentarioService: ComentarioService
+    private route: ActivatedRoute,
+    private actividadService: ActividadService,
+    private comentarioService: ComentarioService,
+    private storageService: StorageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.listarActividades();
-  }
+  this.usuario = this.storageService.getUser();
 
-  listarActividades() {
-    this.actividadservice.getAll().subscribe({
-      next: (actividades) => {
-        this.data = actividades;
-        this.cargarComentarios();
-      },
-      error: (err) => console.error('Error actividades:', err)
-    });
-  }
+  // Primero cargamos todas las actividades
+  this.actividadService.getAll().subscribe({
+    next: (actividades) => {
+      this.data = actividades;
 
-  get actividadesFiltradas(): Actividad | undefined {
-    return this.data.find((actividad) =>
-      actividad.nombre.toLowerCase().includes(this.busqueda.toLowerCase())
+      // Después obtenemos el id de la ruta y cargamos la actividad
+      this.route.params.subscribe((params) => {
+        const id = +params['id'];
+        this.cargarActividad(id);
+      });
+    },
+    error: (err) => console.error('Error cargando actividades:', err),
+  });
+}
+
+
+  cargarActividad(id: number) {
+    // Buscar en el array de actividades cargadas
+    const actividadEncontrada = this.data.find(
+      (actividad: { id: number }) => actividad.id === id
     );
+
+    if (!actividadEncontrada) {
+      console.error('Actividad no encontrada');
+      return;
+    }
+
+    this.actividad = actividadEncontrada;
+    this.cargarComentarios();
   }
 
   cargarComentarios() {
-    this.comentarioService.getAllComentarios().subscribe({
-      next: (comentarios: any[]) => {
-        const actividad = this.actividadesFiltradas;
-        if (actividad) {
-          this.comentarios = comentarios.filter(
-            c => c.actividad?.id === actividad.id
-          );
-        }
-      },
-      error: (err: any) => console.error('Error comentarios:', err)
-    });
+    if (!this.actividad) return;
+    this.comentarioService
+      .getComentariosPorActividad(this.actividad.id)
+      .subscribe({
+        next: (comentarios) => (this.comentarios = comentarios),
+        error: (err) => console.error('Error comentarios:', err),
+      });
   }
 
   enviarComentario() {
-    const actividad = this.actividadesFiltradas;
-    if (!actividad) {
-      alert('No hay actividad seleccionada.');
+    if (!this.actividad) return;
+
+    const usuario = this.storageService.getUser();
+
+    if (!usuario?.id) {
+      alert('Debe estar logueado para comentar.');
       return;
     }
+
     if (!this.nuevoComentario.trim()) {
       alert('El comentario no puede estar vacío.');
       return;
     }
 
-    const idUsuario = 1; // Cambia aquí según usuario logueado
-
     const comentarioBody = {
       comentario: this.nuevoComentario,
-      fechaComentario: new Date().toISOString().split('T')[0]
+      fechaComentario: new Date().toISOString().split('T')[0],
     };
 
-    this.comentarioService.createComentario(idUsuario, actividad.id, comentarioBody).subscribe({
-      next: () => {
-        this.nuevoComentario = '';
-        this.cargarComentarios();
-      },
-      error: (err: any) => {
-        console.error('Error creando comentario:', err);
-        alert('Error al enviar comentario');
-      }
-    });
+    this.comentarioService
+      .createComentario(usuario.id, this.actividad.id, comentarioBody)
+      .subscribe({
+        next: () => {
+          this.nuevoComentario = '';
+          this.cargarComentarios();
+        },
+        error: (err) => {
+          console.error('Error al enviar comentario:', err);
+          alert('Error al enviar comentario');
+        },
+      });
+  }
+
+  comprarActividad(actividad: Actividad, event: Event): void {
+    event.stopPropagation();
+    if (this.storageService.isLoggedIn()) {
+      this.router.navigate(['/paypal', actividad.id], {
+        queryParams: { amount: actividad.precio },
+      });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

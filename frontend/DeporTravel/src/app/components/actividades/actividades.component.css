@@ -1,6 +1,76 @@
 /* Sección de actividades */
 .actividades-section {
   margin-top: 30px;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Buscador centrado con flexbox */
+.buscador {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Ancho fijo para cada filtro */
+.buscador > .col-md-4 {
+  max-width: 300px;
+  display: flex;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Para el botón limpiar */
+.buscador > .col-md-1 {
+  max-width: 120px;
+  display: flex;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Input y selects al 100% de su contenedor */
+.buscador input.form-control,
+.buscador select.form-select.shadow-sm {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.buscador input.form-control:focus,
+.buscador select.form-select.shadow-sm:focus {
+  border-color: #edc981;
+  outline: none;
+  box-shadow: 0 0 5px rgba(237, 201, 129, 0.6);
+}
+
+/* Botón Limpiar filtros */
+.buscador .btn-limpiar {
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: #f8f9fa;
+  border: 1.5px solid black;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buscador .btn-limpiar:hover {
+  background-color: #edc981;
+  color: white;
 }
 
 /* Imagen de la tarjeta */
@@ -20,12 +90,11 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
-/* Zoom al pasar el ratón sobre una tarjeta */
 .card:hover {
   transform: scale(1.03);
-  transition: transform 0.3s ease;
   z-index: 1;
 }
 
@@ -62,6 +131,7 @@
 .col-md-4 {
   display: flex;
   padding: 15px;
+  box-sizing: border-box;
 }
 
 /* Asegura el mismo alto en todas las tarjetas */
@@ -76,7 +146,7 @@
 .card-footer {
   padding: 10px;
   background-color: #fff;
-  text-align: right; /* Alineación del botón a la derecha */
+  text-align: right;
   position: relative;
 }
 
@@ -86,7 +156,7 @@
   padding: 8px 15px;
   font-size: 14px;
   background-color: #f8f9fa;
-  border: 1.5px solid black; /* Unificado el borde */
+  border: 1.5px solid black;
   border-radius: 5px;
   color: black;
   transition: background-color 0.3s, color 0.3s;
@@ -98,15 +168,16 @@
 }
 
 .add-to-cart i {
-  margin-right: 5px; /* Espacio entre ícono y texto */
+  margin-right: 5px;
 }
 
 /* Espaciado entre filas */
 .row {
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
   display: flex;
   flex-wrap: wrap;
+  box-sizing: border-box;
 }
 
 /* Separador visual del header */
@@ -115,14 +186,60 @@
   border-top: 2px solid #ccc;
 }
 
-/* Buscador */
-.buscador {
-  max-width: 400px;
-  margin: 0 auto;
+/* Mensaje no hay actividades */
+.mensaje {
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
-.buscador input {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.mensaje p {
+  color: #6c757d;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/* ===== Responsive ===== */
+
+/* Tablet: 2 columnas actividades y filtros uno debajo de otro */
+@media (max-width: 992px) {
+  .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .buscador {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .buscador > .col-md-4,
+  .buscador > .col-md-1 {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Móvil: 1 columna actividades y filtros apilados */
+@media (max-width: 767.98px) {
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .buscador {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .buscador > .col-md-4,
+  .buscador > .col-md-1 {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
 }

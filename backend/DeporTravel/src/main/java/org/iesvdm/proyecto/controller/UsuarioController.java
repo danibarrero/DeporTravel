@@ -5,10 +5,13 @@ import org.iesvdm.proyecto.domain.Usuario;
 import org.iesvdm.proyecto.exception.CorreoElectronicoException;
 import org.iesvdm.proyecto.exception.UsuarioNotFoundException;
 import org.iesvdm.proyecto.repository.UsuarioRepository;
+import org.iesvdm.proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -18,6 +21,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping("/usuariosAll")
     public List<Usuario> getAllUsuarios() {
@@ -53,6 +59,15 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
         usuarioRepository.delete(usuario);
+    }
+
+    @PutMapping("/{id}/contrasena")
+    public ResponseEntity<?> cambiarContrasena(
+            @PathVariable Long id,
+            @RequestBody Map<String, String> request) {
+        String nuevaContrasena = request.get("nuevaContrasena");
+        usuarioService.cambiarContrasena(id, nuevaContrasena);
+        return ResponseEntity.ok().build();
     }
 
 }

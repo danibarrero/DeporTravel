@@ -11,18 +11,31 @@ export interface Comentario {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ComentarioService {
-  baseUrl = 'http://localhost:8080/v1/api/comentarios';
+  url = 'http://localhost:8080/v1/api/comentarios';
 
   constructor(private http: HttpClient) {}
 
-  getAllComentarios(): Observable<Comentario[]> {
-    return this.http.get<Comentario[]>(`${this.baseUrl}/comentariosAll`);
+  getAllComentarios() {
+    return this.http.get<Comentario[]>(`${this.url}/comentariosAll`);
   }
 
-  createComentario(idUsuario: number, idActividad: number, comentario: Comentario): Observable<Comentario> {
-    return this.http.post<Comentario>(`${this.baseUrl}/${idUsuario}/${idActividad}`, comentario);
+  getComentariosPorActividad(idActividad: number) {
+    return this.http.get<Comentario[]>(
+      `${this.url}/actividad/${idActividad}`
+    );
+  }
+
+  createComentario(
+    idUsuario: number,
+    idActividad: number,
+    comentario: Comentario
+  ) {
+    return this.http.post<Comentario>(
+      `${this.url}/${idUsuario}/${idActividad}`,
+      comentario
+    );
   }
 }

@@ -27,6 +27,26 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 1;
   box-sizing: border-box;
+  position: relative;
+}
+
+.form-back-button {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  color: #333;
+  z-index: 2;
+  background-color: white;
+  border-radius: 25%;
+  padding: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease;
+}
+
+.form-back-button:hover {
+  background-color: #f0f0f0;
 }
 
 .logo {
@@ -91,6 +111,22 @@ button {
 
 button:hover {
   background-color: #c99836;
+}
+
+.link-button {
+  background: transparent;
+  color: #e0b347;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.link-button:hover {
+  color: #c99836;
+  background: transparent;
 }
 
 .error {

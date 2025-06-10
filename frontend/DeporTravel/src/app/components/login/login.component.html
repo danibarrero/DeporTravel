@@ -7,6 +7,10 @@
     (ngSubmit)="onSubmit()"
     novalidate
   >
+    <div class="form-back-button" (click)="goBack()" title="Volver">
+      <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
     <img src="img/Logo sin fondo.png" alt="DeporTravel" class="logo" />
     <h2>Iniciar Sesión</h2>
 
@@ -27,7 +31,10 @@
       />
     </div>
     <div
-      *ngIf="correoElectronico?.invalid && (correoElectronico?.touched || correoElectronico?.dirty)"
+      *ngIf="
+        correoElectronico?.invalid &&
+        (correoElectronico?.touched || correoElectronico?.dirty)
+      "
       class="error"
     >
       <small *ngIf="correoElectronico?.errors?.['required']">
@@ -54,7 +61,7 @@
       />
       <i
         class="fa-solid"
-        [ngClass]="mostrarContrasena ? 'fa-eye-slash' : 'fa-eye'"
+        [ngClass]="mostrarContrasena ? 'fa-eye' : 'fa-eye-slash'"
         (click)="VerOcultarContrasena()"
         title="Mostrar/Ocultar contraseña"
       ></i>

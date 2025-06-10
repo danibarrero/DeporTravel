@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-registrarse',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registrarse.component.html',
   styleUrls: ['./registrarse.component.css'],
 })
@@ -42,14 +42,19 @@ export class RegistrarseComponent implements OnInit {
       return;
     }
 
-    const { nombre, apellido, correoElectronico, contrasena } =
-      this.registerForm.value;
-    const rol = 'usuario';
+    const formData = this.registerForm.value;
 
     this.authService
-      .register(nombre, apellido, contrasena, correoElectronico, rol)
+      .register(
+        formData.nombre,
+        formData.apellido,
+        formData.contrasena,
+        formData.correoElectronico,
+        'USER'
+      )
       .subscribe({
         next: () => {
+          // Al registrar, redirige al login automáticamente
           this.router.navigate(['/login']);
         },
         error: (err) => {
@@ -63,6 +68,11 @@ export class RegistrarseComponent implements OnInit {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
+  goBack(): void {
+    window.history.back();
+  }
+
+  // Getters para validaciones
   get nombre() {
     return this.registerForm.get('nombre');
   }

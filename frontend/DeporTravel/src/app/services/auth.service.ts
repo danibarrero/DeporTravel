@@ -7,7 +7,7 @@ import { StorageService } from './storge.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiAuthURL = 'http://localhost:8080/v1/api/auth/';
+  private url = 'http://localhost:8080/v1/api/auth/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -22,7 +22,7 @@ export class AuthService {
 
   login(correoElectronico: string, contrasena: string): Observable<any> {
     return this.httpClient.post(
-      this.apiAuthURL + 'login',
+      this.url + 'login',
       {
         correoElectronico,
         contrasena,
@@ -39,22 +39,22 @@ export class AuthService {
 
   register(
     nombre: string,
-    apellidos: string,
+    apellido: string,
     contrasena: string,
     correoElectronico: string,
     rol: string
   ): Observable<any> {
-    let registerRequest = {
-      nombre: nombre,
-      apellidos: apellidos,
-      contrasena: contrasena,
-      correoElectronico: correoElectronico,
+    const registerRequest = {
+      nombre,
+      apellido,
+      contrasena,
+      correoElectronico,
       roles: [rol],
     };
 
     return this.httpClient.post(
-      this.apiAuthURL + 'register',
-      JSON.stringify(registerRequest),
+      `${this.url}register`,
+      registerRequest,
       this.httpOptions
     );
   }
@@ -72,4 +72,9 @@ export class AuthService {
     }
     return throwError(() => errorMessage);
   }
+
+  getCurrentUser(): any {
+  return this.storageService.getUser();  
+}
+
 }

@@ -89,6 +89,10 @@ export class IniciarSesionComponent implements OnInit {
     this.mostrarContrasena = !this.mostrarContrasena;
   }
 
+  goBack(): void {
+    window.history.back();
+  }
+
   get contrasena() {
     return this.loginForm.get('contrasena');
   }

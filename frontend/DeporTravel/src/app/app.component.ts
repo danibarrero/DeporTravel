@@ -31,7 +31,10 @@ export class AppComponent {
           '/cambiar-contrasena',
         ];
 
-        if (this.router.url.startsWith('/mis-actividades') && this.router.url.startsWith('/administrar')) {
+        if (
+          this.router.url.startsWith('/mis-actividades') ||
+          this.router.url.startsWith('/administrar')
+        ) {
           this.showHeaderAndFooter = false;
           this.showOnlyHeader = true;
         } else {

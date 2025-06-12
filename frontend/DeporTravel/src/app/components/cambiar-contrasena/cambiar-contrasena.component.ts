@@ -67,7 +67,6 @@ export class CambiarContrasenaComponent implements OnInit {
         },
         error: (err) => {
           console.error(err);
-          alert('Error al cambiar la contraseña. Inténtalo de nuevo.');
         },
       });
   }

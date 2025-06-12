@@ -91,16 +91,6 @@ export class ActividadComponent implements OnInit {
 
     const usuario = this.storageService.getUser();
 
-    if (!usuario?.id) {
-      alert('Debe estar logueado para comentar.');
-      return;
-    }
-
-    if (!this.nuevoComentario.trim()) {
-      alert('El comentario no puede estar vacío.');
-      return;
-    }
-
     const comentarioBody = {
       comentario: this.nuevoComentario,
       fechaComentario: new Date().toISOString().split('T')[0],
@@ -115,7 +105,6 @@ export class ActividadComponent implements OnInit {
         },
         error: (err) => {
           console.error('Error al enviar comentario:', err);
-          alert('Error al enviar comentario');
         },
       });
   }

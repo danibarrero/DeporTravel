@@ -5,6 +5,6 @@ RUN mvn clean package -DskipTests
 
 
 FROM amazoncorretto:17-alpine
-COPY --from=build /target/Proyecto-0.0.1-SNAPSHOT.jar
+COPY --from=build /target/Proyecto-0.0.1-SNAPSHOT.jar Proyecto-0.0.1-SNAPSHOT.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar","Proyecto-0.0.1-SNAPSHOT.jar"]

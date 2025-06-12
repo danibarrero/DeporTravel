@@ -14,7 +14,8 @@ export interface Comentario {
   providedIn: 'root',
 })
 export class ComentarioService {
-  url = 'http://localhost:8080/v1/api/comentarios';
+  //private url = 'http://localhost:8080/v1/api/comentarios';
+  private url = 'https://deportravel.onrender.com/v1/api/comentarios';
 
   constructor(private http: HttpClient) {}
 
@@ -23,9 +24,7 @@ export class ComentarioService {
   }
 
   getComentariosPorActividad(idActividad: number) {
-    return this.http.get<Comentario[]>(
-      `${this.url}/actividad/${idActividad}`
-    );
+    return this.http.get<Comentario[]>(`${this.url}/actividad/${idActividad}`);
   }
 
   createComentario(

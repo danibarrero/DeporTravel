@@ -7,7 +7,8 @@ import { StorageService } from './storge.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private url = 'http://localhost:8080/v1/api/auth/';
+  //private url = 'http://localhost:8080/v1/api/auth/';
+  private url = 'https://deportravel.onrender.com/v1/api/auth';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -74,7 +75,6 @@ export class AuthService {
   }
 
   getCurrentUser(): any {
-  return this.storageService.getUser();  
-}
-
+    return this.storageService.getUser();
+  }
 }

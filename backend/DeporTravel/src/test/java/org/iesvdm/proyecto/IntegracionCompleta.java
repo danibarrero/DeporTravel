@@ -51,7 +51,7 @@ public class IntegracionCompleta {
                         .apellido("Pérez")
                         .correoElectronico("juan@gmail.com")
                         .contrasena(passwordEncoder.encode("123abc"))
-                        .roles(Set.of(rolAdmin))
+                        .roles(Set.of(rolUser))
                         .build());
 
         Usuario usuario2 = usuarioService.createUsuario(
@@ -60,7 +60,7 @@ public class IntegracionCompleta {
                         .apellido("García")
                         .correoElectronico("ana@gmail.com")
                         .contrasena(passwordEncoder.encode("123abc"))
-                        .roles(Set.of(rolUser))
+                        .roles(Set.of(rolAdmin))
                         .build());
 
         // 3. Crear actividades

@@ -16,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/v1/api/comentarios")
 public class ComentarioController {
 

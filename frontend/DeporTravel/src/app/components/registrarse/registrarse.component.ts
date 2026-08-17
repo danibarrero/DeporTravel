@@ -54,7 +54,6 @@ export class RegistrarseComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          // Al registrar, redirige al login automáticamente
           this.router.navigate(['/login']);
         },
         error: (err) => {
@@ -72,7 +71,6 @@ export class RegistrarseComponent implements OnInit {
     window.history.back();
   }
 
-  // Getters para validaciones
   get nombre() {
     return this.registerForm.get('nombre');
   }

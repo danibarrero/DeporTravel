@@ -23,6 +23,7 @@ public class UsuarioService {
     private PasswordEncoder passwordEncoder;
 
     public List<Usuario> getAllUsuarios() {
+
         return usuarioRepository.findAll();
     }
 

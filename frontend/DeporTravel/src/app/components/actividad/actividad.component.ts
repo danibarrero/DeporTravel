@@ -43,23 +43,22 @@ export class ActividadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-  this.usuario = this.storageService.getUser();
+    this.usuario = this.storageService.getUser();
 
-  // Primero cargamos todas las actividades
-  this.actividadService.getAll().subscribe({
-    next: (actividades) => {
-      this.data = actividades;
+    // Primero cargamos todas las actividades
+    this.actividadService.getAll().subscribe({
+      next: (actividades) => {
+        this.data = actividades;
 
-      // Después obtenemos el id de la ruta y cargamos la actividad
-      this.route.params.subscribe((params) => {
-        const id = +params['id'];
-        this.cargarActividad(id);
-      });
-    },
-    error: (err) => console.error('Error cargando actividades:', err),
-  });
-}
-
+        // Después obtenemos el id de la ruta y cargamos la actividad
+        this.route.params.subscribe((params) => {
+          const id = +params['id'];
+          this.cargarActividad(id);
+        });
+      },
+      error: (err) => console.error('Error cargando actividades:', err),
+    });
+  }
 
   cargarActividad(id: number) {
     // Buscar en el array de actividades cargadas

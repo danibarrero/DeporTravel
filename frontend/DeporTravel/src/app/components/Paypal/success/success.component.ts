@@ -17,6 +17,9 @@ export class SuccessComponent implements OnInit {
   private readonly inscripcionService = inject(InscripcionService);
   private readonly storageService = inject(StorageService);
 
+  yaRegistrado = false;
+  error = false;
+
   ngOnInit() {
     const idActividad = Number(
       this.route.snapshot.queryParamMap.get('actividadId')
@@ -25,7 +28,7 @@ export class SuccessComponent implements OnInit {
 
     if (!usuario || !idActividad) {
       console.warn('Falta usuario o idActividad');
-      this.router.navigate(['/payment/cancel']);
+      this.error = true;
       return;
     }
 
@@ -34,29 +37,31 @@ export class SuccessComponent implements OnInit {
       .subscribe({
         next: (existe: boolean) => {
           if (existe) {
-            // Ya inscrito
-            this.router.navigate(['/payment/cancel']);
+            this.yaRegistrado = true;
+            channel.postMessage({ message: 'successPaypal' });
           } else {
-            // Crear inscripción
             this.inscripcionService
               .crearInscripcion(usuario.id, idActividad)
               .subscribe({
                 next: () => {
                   console.log('Inscripción creada correctamente');
                   channel.postMessage({ message: 'successPaypal' });
-                  this.router.navigate(['/inicio']);
                 },
                 error: (err) => {
                   console.error('Error al crear inscripción:', err);
-                  this.router.navigate(['/payment/cancel']);
+                  this.error = true;
                 },
               });
           }
         },
         error: (err) => {
           console.error('Error al verificar inscripción:', err);
-          this.router.navigate(['/payment/cancel']);
+          this.error = true;
         },
       });
+  }
+
+  goInicio(): void {
+    this.router.navigate(['/inicio']);
   }
 }

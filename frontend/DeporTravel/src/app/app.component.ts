@@ -29,6 +29,7 @@ export class AppComponent {
           '/payment/cancel',
           '/perfil',
           '/cambiar-contrasena',
+          '/payment/success'
         ];
 
         if (

@@ -87,7 +87,7 @@ export class PaypalComponent implements OnInit {
         } else {
           this.router.navigate(['/payment/cancel']);
         }
-      }, 2000);
+      }, 1000); 
     }
   }
 

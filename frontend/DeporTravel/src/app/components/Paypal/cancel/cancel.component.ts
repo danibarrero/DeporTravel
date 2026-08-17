@@ -13,14 +13,12 @@ export class CancelComponent {
   PayerID: string | null = null;
 
   ngOnInit() {
-    setTimeout(() => {
-      channel.postMessage({
-        message: 'cancelPaypal',
-        paymentId: null,
-        PayerID: null,
-      });
-      this.onClose();
-    }, 100);
+    channel.postMessage({
+      message: 'cancelPaypal',
+      paymentId: null,
+      PayerID: null,
+    });
+    this.onClose();
   }
 
   onClose() {

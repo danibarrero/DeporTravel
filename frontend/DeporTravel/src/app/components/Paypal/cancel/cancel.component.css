@@ -28,12 +28,6 @@
   margin-bottom: 1rem;
 }
 
-.cancel-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: #dc2626;
-}
-
 .cancel-title {
   font-size: 1.5rem;
   font-weight: 700;
@@ -68,4 +62,3 @@
 .cancel-button:hover {
   background-color: #c99836;
 }
-

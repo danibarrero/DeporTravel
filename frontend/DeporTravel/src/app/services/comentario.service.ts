@@ -15,7 +15,7 @@ export interface Comentario {
 })
 export class ComentarioService {
   //private url = 'http://localhost:8080/v1/api/comentarios';
-  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
+  private url = 'https://deportravel-db.onrender.com/v1/api/comentarios';
 
   constructor(private http: HttpClient) {}
 
@@ -30,11 +30,11 @@ export class ComentarioService {
   createComentario(
     idUsuario: number,
     idActividad: number,
-    comentario: Comentario
+    comentario: Comentario,
   ) {
     return this.http.post<Comentario>(
       `${this.url}/${idUsuario}/${idActividad}`,
-      comentario
+      comentario,
     );
   }
 }

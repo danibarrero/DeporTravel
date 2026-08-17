@@ -18,7 +18,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {}
 
   login(correoElectronico: string, contrasena: string): Observable<any> {
@@ -28,7 +28,7 @@ export class AuthService {
         correoElectronico,
         contrasena,
       },
-      this.httpOptions
+      this.httpOptions,
     );
   }
 
@@ -43,7 +43,7 @@ export class AuthService {
     apellido: string,
     contrasena: string,
     correoElectronico: string,
-    rol: string
+    rol: string,
   ): Observable<any> {
     const registerRequest = {
       nombre,
@@ -56,7 +56,7 @@ export class AuthService {
     return this.httpClient.post(
       `${this.url}register`,
       registerRequest,
-      this.httpOptions
+      this.httpOptions,
     );
   }
 

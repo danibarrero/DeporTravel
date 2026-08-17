@@ -8,11 +8,11 @@ import { Actividad } from '../components/actividad/actividad.component';
 })
 export class InscripcionService {
   //private url = 'http://localhost:8080/v1/api/inscripciones';
-  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
+  private url = 'https://deportravel-db.onrender.com/v1/api/inscripciones';
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {}
 
   crearInscripcion(idUsuario: number, idActividad: number) {
@@ -26,13 +26,13 @@ export class InscripcionService {
     return this.http.post(
       `${this.url}/${idUsuario}/${idActividad}`,
       {},
-      { headers }
+      { headers },
     );
   }
 
   existeInscripcion(idUsuario: number, idActividad: number) {
     return this.http.get<boolean>(
-      `${this.url}/exists/${idUsuario}/${idActividad}`
+      `${this.url}/exists/${idUsuario}/${idActividad}`,
     );
   }
 
@@ -46,7 +46,7 @@ export class InscripcionService {
 
     return this.http.get<Actividad[]>(
       `${this.url}/actividadesPorUsuario/${idUsuario}`,
-      { headers }
+      { headers },
     );
   }
 }

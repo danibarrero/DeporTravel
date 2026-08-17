@@ -7,11 +7,11 @@ import { Injectable } from '@angular/core';
 })
 export class UsuarioService {
   //private url = 'http://localhost:8080/v1/api/usuarios';
-  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
+  private url = 'https://deportravel-db.onrender.com/v1/api/usuarios';
 
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
   ) {}
 
   getUsuarios() {
@@ -34,7 +34,7 @@ export class UsuarioService {
     return this.http.put<void>(
       `${this.url}/${id}/contrasena`,
       { nuevaContrasena },
-      { headers }
+      { headers },
     );
   }
 

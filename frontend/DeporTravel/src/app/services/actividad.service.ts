@@ -8,7 +8,7 @@ export class ActividadService {
   private httpClient = inject(HttpClient);
   //private url = 'http://localhost:8080/v1/api/actividades';
   private url = 'https://deportravel-db.onrender.com/v1/api/actividades';
-
+  
   getAll() {
     return this.httpClient.get(`${this.url}/actividadesAll`);
   }

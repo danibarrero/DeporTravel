@@ -14,8 +14,8 @@ export interface Comentario {
   providedIn: 'root',
 })
 export class ComentarioService {
-  private url = 'http://localhost:8080/v1/api/comentarios';
-  //private url = 'https://deportravel.onrender.com/v1/api/comentarios';
+  //private url = 'http://localhost:8080/v1/api/comentarios';
+  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
 
   constructor(private http: HttpClient) {}
 

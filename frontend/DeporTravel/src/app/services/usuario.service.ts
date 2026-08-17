@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UsuarioService {
-  private url = 'http://localhost:8080/v1/api/usuarios';
-  //private url = 'https://deportravel.onrender.com/v1/api/usuarios';
+  //private url = 'http://localhost:8080/v1/api/usuarios';
+  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
 
   constructor(
     private http: HttpClient,

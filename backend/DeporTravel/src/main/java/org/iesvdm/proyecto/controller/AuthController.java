@@ -25,7 +25,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://depor-travel.vercel.app"})
 @RequestMapping("/v1/api/auth")
 public class AuthController {
     @Autowired

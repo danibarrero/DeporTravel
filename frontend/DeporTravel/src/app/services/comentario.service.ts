@@ -15,7 +15,7 @@ export interface Comentario {
 })
 export class ComentarioService {
   //private url = 'http://localhost:8080/v1/api/comentarios';
-  private url = 'https://deportravel-db.onrender.com/v1/api/comentarios';
+  private url = 'https://deportravel-backend.onrender.com/v1/api/comentarios';
 
   constructor(private http: HttpClient) {}
 

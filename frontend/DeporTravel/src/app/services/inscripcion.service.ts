@@ -8,7 +8,7 @@ import { Actividad } from '../components/actividad/actividad.component';
 })
 export class InscripcionService {
   //private url = 'http://localhost:8080/v1/api/inscripciones';
-  private url = 'https://deportravel-db.onrender.com/v1/api/inscripciones';
+  private url = 'https://deportravel-backend.onrender.com/v1/api/inscripciones';
 
   constructor(
     private http: HttpClient,

@@ -8,7 +8,7 @@ import { StorageService } from './storge.service';
 })
 export class AuthService {
   //private url = 'http://localhost:8080/v1/api/auth/';
-  private url = 'https://deportravel-db.onrender.com/v1/api/auth/';
+  private url = 'https://deportravel-backend.onrender.com/v1/api/auth/';
 
   httpOptions = {
     headers: new HttpHeaders({
